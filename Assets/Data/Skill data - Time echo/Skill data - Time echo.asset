@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Skill data - Time echo
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
   cost: 0
+  unlockedByDefault: 0
+  skillType: 2
+  upgradeData:
+    upgradeType: 6
+    cooldown: 0
   displayName: Time echo
   description: 'asdasdasdasdasda
 

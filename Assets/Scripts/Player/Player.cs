@@ -88,6 +88,9 @@ public class Player : Entity
         input.Enable();        
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
+
+
+        input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
         // input.Player.Jump.performed += ctx => Debug.Log(ctx.ReadValueAsButton());
         // input.Player.Jump.canceled += ctx => Debug.Log(ctx.ReadValueAsButton());
     }

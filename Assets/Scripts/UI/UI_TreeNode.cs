@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.GraphToolkit.Editor;
 
 public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
@@ -45,6 +46,16 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillTree = GetComponentInParent<UI_SkillTree>();
         connectHandler = GetComponent<UI_TreeConnectHandler>();
         UpdateIconColor(skillLockedColor);
+        
+        // if(skillData.unlockedByDefault)
+        //     Unlock();
+
+    }
+
+    private void Start()
+    {
+        if(skillData.unlockedByDefault)
+            Unlock();
     }
 
     private void Unlock()
@@ -122,7 +133,22 @@ public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private void LockConflictNodes()
     {
         foreach(var node in conflictNodes)
+        {
             node.isLocked = true;
+            node.LockChildNodes();
+        }
+    }
+
+    public void LockChildNodes()
+    {
+        isLocked = true;
+        UI_TreeNode[] children = connectHandler.GetChildNodes();
+        
+        foreach(var node in children)
+        {
+            
+            node.LockChildNodes();
+        }
     }
 
     private Color GetColorByHex(string hexNumber)

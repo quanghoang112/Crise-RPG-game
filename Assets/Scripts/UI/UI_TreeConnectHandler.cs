@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 // using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.MemoryProfiler;
@@ -71,6 +73,20 @@ public class UI_TreeConnectHandler : MonoBehaviour
             if(node.childNode == null)  continue;
             node.childNode.UpdateConnection();
         }
+    }
+
+    public UI_TreeNode[] GetChildNodes()
+    {
+        List<UI_TreeNode> children = new List<UI_TreeNode>();
+
+        foreach (var node in details)
+        {
+            if(node.childNode == null) continue;
+
+            children.Add(node.childNode.GetComponent<UI_TreeNode>());
+        }
+
+        return children.ToArray();
     }
 
     public void UnlockConnectionImage(bool unlocked)

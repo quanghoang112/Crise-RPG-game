@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class SkillDash : SkillBase
 {
-    
+    // private SkillShard shard;
+
+    private void Awake()
+    {
+        skillType = SkillType.Dash;
+    }
     public void OnStartEffect()
     {
         if(Unlocked(SkillUpgradeType.DashCloneOnStart) || Unlocked(SkillUpgradeType.DashCloneOnStartAndArrival))

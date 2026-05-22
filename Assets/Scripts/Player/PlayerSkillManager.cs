@@ -4,9 +4,12 @@ public class PlayerSkillManager : MonoBehaviour
 {
     public SkillDash dash {get;private set;}
 
+    public SkillShard shard {get;private set;}
+
     private void Awake()
     {
         dash = GetComponentInChildren<SkillDash>();
+        shard = GetComponentInChildren<SkillShard>();
     }
 
 
@@ -15,6 +18,7 @@ public class PlayerSkillManager : MonoBehaviour
         switch(type)
         {
             case SkillType.Dash: return dash;
+            case SkillType.TimeShard: return shard;
 
             default:
                 return null;

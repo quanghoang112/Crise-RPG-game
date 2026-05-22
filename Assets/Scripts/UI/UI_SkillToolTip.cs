@@ -70,6 +70,7 @@ public class UI_SkillToolTip : UI_ToolTip
 
         foreach(var node in neededNodes)
         {
+            if(node == null)    continue;
             string nodeColor = node.isUnlocked ? metConditionHex:notMetConditionHex;
             sb.AppendLine($"<Color={nodeColor}>- {node.skillData.displayName} </color>");
         }
@@ -82,6 +83,7 @@ public class UI_SkillToolTip : UI_ToolTip
 
         foreach(var node in conflictNodes)
         {
+            if(node == null)    continue;
             // string nodeColor = node.isUnlocked ? metConditionHex:notMetConditionHex;
             sb.AppendLine($"<Color={importantInfoHex}>- {node.skillData.displayName} </color>");
         }
