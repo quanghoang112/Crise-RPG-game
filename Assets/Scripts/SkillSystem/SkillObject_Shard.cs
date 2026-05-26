@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.Splines.ExtrusionShapes;
 
 public class SkillObject_Shard : SkillObject_Base
 {
+    public event Action OnExplode;
+
     [SerializeField] private GameObject vfxPrefab;
     private CircleCollider2D col;
     private Transform target;
+    
     private float speed;
     public bool canMove;
 
@@ -34,15 +38,34 @@ public class SkillObject_Shard : SkillObject_Base
     }
 
 
-    public void SetupShard(float detonateTime)
+    public void SetupShard(SkillShard shardManager)
     {
-        Invoke(nameof(Explode),detonateTime);
+
+        playerStats = shardManager.player.entityStats;
+        damageScaleData = shardManager.damageScaleData;
+
+        Invoke(nameof(Explode),shardManager.GetDetonateTime());
     }
 
-    private void Explode()
+    public void SetupShard(SkillShard shardManager, float detonateTime, bool canMove, float shardSpeed)
+    {
+
+        playerStats = shardManager.player.entityStats;
+        damageScaleData = shardManager.damageScaleData;
+
+        Invoke(nameof(Explode),shardManager.GetDetonateTime());
+
+        this.canMove = canMove;
+        if(canMove)
+            MoveTowardsClosestTarget(shardSpeed);
+    }
+
+    public void Explode()
     {
         DamageEnemiesInRadius(transform, col.radius);
         Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+
+        OnExplode?.Invoke();
 
         Destroy(gameObject);
     }

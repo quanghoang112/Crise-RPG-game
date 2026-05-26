@@ -7,6 +7,9 @@ public class EntityCombat : MonoBehaviour
     public Collider2D[] targetColliders;
     public EntityVFX entityVFX;
     public EntityStats entityStats;
+
+    public DamageScaleData basicAttackScale;
+
     public float damage;
     public float elementalDamage;
     public bool isCrit;
@@ -16,10 +19,10 @@ public class EntityCombat : MonoBehaviour
     public float targetCheckRadius;
     public LayerMask whatIsTarget;
 
-    [Header("Status effect details")]
-    [SerializeField] private float defaultDuration = 3;
-    [SerializeField] private float chillSlowMultiplier = .2f;
-    [SerializeField] private float electrifyChargeBuildUp = 0.4f;
+    // [Header("Status effect details")]
+    // [SerializeField] private float defaultDuration = 3;
+    // [SerializeField] private float chillSlowMultiplier = .2f;
+    // [SerializeField] private float electrifyChargeBuildUp = 0.4f;
 
     public void Awake()
     {
@@ -35,17 +38,27 @@ public class EntityCombat : MonoBehaviour
     public void performAttack()
     {
         handleTargetDetection();
+
         damage = entityStats.GetPhysicalDamage(out isCrit);
         elementalDamage = entityStats.GetElementalDamage(out ElementType element);   
 
         foreach(var targetCollider in targetColliders)
         {
             IDamagable targetHealth = targetCollider.GetComponent<IDamagable>();
+            
             if(targetHealth == null)
                 continue;
+
+            AttackData attackData = entityStats.GetAttackData(basicAttackScale);
+            EntityStatusHandler statusHandler = targetCollider.GetComponent<EntityStatusHandler>();
+
+
+            ElementalEffectData effectData = new ElementalEffectData(entityStats, basicAttackScale);
+
             if(targetHealth.TakeDamage(damage,elementalDamage,element,transform))
             {
-                applyStatusEffect(targetCollider.transform,element);
+                statusHandler?.ApplyStatusEffect(element, attackData.effectData);
+                // applyStatusEffect(targetCollider.transform,element);
                 entityVFX.updateOnHitVFXColor(element);
                 if(!isCrit)
                     entityVFX.CreateOnHitVFX(targetCollider.transform);
@@ -55,27 +68,27 @@ public class EntityCombat : MonoBehaviour
         }
     }
 
-    public void applyStatusEffect (Transform target, ElementType element)
-    {
-        EntityStatusHandler statusHandler = target.GetComponent<EntityStatusHandler>();
-        if(!statusHandler)  return;
-        if(statusHandler.CanBeApllied(element))
-        if(element == ElementType.Fire)
-        {
-            Debug.Log("Fire");
-            statusHandler.ApplyBurnEffect(defaultDuration,elementalDamage);
-        }
-        else if (element == ElementType.Ice)
-        {
-            Debug.Log("Ice");
-            statusHandler.ApplyChilledEffect(defaultDuration,chillSlowMultiplier);
-        }
-        else if (element == ElementType.Lightning)
-        {
-            Debug.Log("Lighting");
-            statusHandler.ApplyElectrifyEffect(defaultDuration,elementalDamage*3,electrifyChargeBuildUp);
-        }
-    }
+    // public void applyStatusEffect (Transform target, ElementType element)
+    // {
+    //     EntityStatusHandler statusHandler = target.GetComponent<EntityStatusHandler>();
+    //     if(!statusHandler)  return;
+    //     if(statusHandler.CanBeApllied(element))
+    //     if(element == ElementType.Fire)
+    //     {
+    //         Debug.Log("Fire");
+    //         statusHandler.ApplyBurnEffect(defaultDuration,elementalDamage);
+    //     }
+    //     else if (element == ElementType.Ice)
+    //     {
+    //         Debug.Log("Ice");
+    //         statusHandler.ApplyChilledEffect(defaultDuration,chillSlowMultiplier);
+    //     }
+    //     else if (element == ElementType.Lightning)
+    //     {
+    //         Debug.Log("Lighting");
+    //         statusHandler.ApplyElectrifyEffect(defaultDuration,elementalDamage*3,electrifyChargeBuildUp);
+    //     }
+    // }
 
     protected Collider2D[] handleTargetDetection()
     {

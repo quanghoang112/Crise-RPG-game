@@ -100,6 +100,9 @@ public class Player : Entity
     }
 
 
+    public void TeleportPLayer(Vector3 position) => transform.position = position;
+
+
     protected override IEnumerator slowDownEntityCo(float duration, float slowMultiplier)
     {
         float originalMoveSpeed = moveSpeed;

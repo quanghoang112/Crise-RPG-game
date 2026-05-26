@@ -1,6 +1,7 @@
 // using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
+using UnityEngine.UIElements;
 
 public class EntityStats : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class EntityStats : MonoBehaviour
     public StatMajor majorStats;
     public StatOffense offenseStats;
     public StatDefense defenseStats;
+
+    public AttackData GetAttackData(DamageScaleData scaleData)
+    {
+        return new AttackData(this, scaleData);
+    }
 
     public float GetElementalDamage(out ElementType element, float scaleFactor = 1)
     {

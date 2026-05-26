@@ -16,5 +16,5 @@ public enum SkillUpgradeType
     ShardMoveToEnemy,
     ShardTripleCast,
     ShardTeleport,
-    ShardTeleportAndHeal
+    ShardTeleportHpRewind
 }

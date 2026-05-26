@@ -17,7 +17,7 @@ MonoBehaviour:
   skillType: 2
   upgradeData:
     upgradeType: 6
-    cooldown: 0
+    cooldown: 3
   displayName: Time shard
   description: asdasdasd
   icon: {fileID: 1779770775, guid: 7ae0115109b4a6f42a4f7ad59397d09b, type: 3}

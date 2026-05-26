@@ -7,15 +7,32 @@ public class SkillObject_Base : MonoBehaviour
     protected Transform targetCheck;
     [SerializeField] protected float checkRadius = 1;
 
+    protected EntityStats playerStats;
+    protected DamageScaleData damageScaleData;
+
     protected void DamageEnemiesInRadius(Transform t, float radius)
     {
         foreach(var target in EnemiesAround(t,radius))
         {
             IDamagable damagable = target.GetComponent<IDamagable>();
+            
             if(damagable == null)
                 return;
 
-            damagable.TakeDamage(1,1,ElementType.None,transform);
+            EntityStatusHandler statusHandler = target.GetComponent<EntityStatusHandler>();
+
+            AttackData attackData = playerStats.GetAttackData(damageScaleData);
+
+            ElementalEffectData effectData = new ElementalEffectData(playerStats, damageScaleData);
+
+            float physicalDamage = attackData.physicalDamage;
+            float elementalDamage = attackData.elementalDamage;
+            ElementType element = attackData.element;
+
+            damagable.TakeDamage(1,1,element,transform);
+        
+            if(element != ElementType.None)
+                statusHandler.ApplyStatusEffect(element, effectData);
         }
     }
 

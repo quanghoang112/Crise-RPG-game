@@ -28,11 +28,22 @@ public class EntityStatusHandler : MonoBehaviour
         entityHealth = GetComponent<EntityHealth>();
     }
 
-
-    public void ApplyElectrifyEffect()
+    public void ApplyStatusEffect(ElementType element, ElementalEffectData effectData)
     {
-        
+        if(element == ElementType.Ice && CanBeApllied(ElementType.Ice))
+        {
+            ApplyChilledEffect(effectData.chillDuration,effectData.chillSlowMultiplier);
+        }
+        if(element == ElementType.Fire && CanBeApllied(ElementType.Fire))
+        {
+            ApplyBurnEffect(effectData.burnDuration,effectData.burnDamage);
+        }
+        if(element == ElementType.Lightning && CanBeApllied(ElementType.Lightning))
+        {
+            ApplyElectrifyEffect(effectData.shockDuration,effectData.shockDamage,effectData.shockCharge);
+        }
     }
+
     public void ApplyChilledEffect (float duration, float slowMultiplier)
     {
         Debug.Log("asdasd");

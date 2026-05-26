@@ -4,7 +4,7 @@ public class SkillDash : SkillBase
 {
     // private SkillShard shard;
 
-    private void Awake()
+    protected override void Awake()
     {
         skillType = SkillType.Dash;
     }
@@ -34,7 +34,9 @@ public class SkillDash : SkillBase
 
     private void CreateShard()
     {
-        Debug.Log("Create time shard!");
+        // Debug.Log("Create time shard!");
+        skillManager.shard.CreateRawShard();
+        // skillManager.shard.CreateShard();
     }
 
     private void CreateClone()
