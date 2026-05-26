@@ -10,6 +10,7 @@ public class Player : Entity
     public static event Action onPlayerDeath;    
     public PlayerSkillManager skillManager {get;private set;}
     public PlayerVFX vfx;
+    public UI ui;
 
 
 #region State Variable
@@ -63,6 +64,7 @@ public class Player : Entity
         input = new PlayerInputSet();
         skillManager = GetComponent<PlayerSkillManager>();
         vfx = GetComponent<PlayerVFX>();
+        ui = FindAnyObjectByType<UI>();
 
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine,"Move");
@@ -91,6 +93,8 @@ public class Player : Entity
 
 
         input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
+        
+        input.Player.ToolTip.performed += ctx => ui.ToggleCanvas();
         // input.Player.Jump.performed += ctx => Debug.Log(ctx.ReadValueAsButton());
         // input.Player.Jump.canceled += ctx => Debug.Log(ctx.ReadValueAsButton());
     }
