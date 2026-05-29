@@ -11,9 +11,11 @@ public class Player : Entity
     public PlayerSkillManager skillManager {get;private set;}
     public PlayerVFX vfx;
     public UI ui;
-
+    public EntityHealth entityHealth {get; private set;}
+    public EntityStatusHandler statusHandler{get;private set;}
 
 #region State Variable
+    public PlayerThrowSwordState throwSwordState{get; private set;}
     public PlayerIdleState idleState {get; private set;}
     public PlayerMoveState moveState {get; private set;}
     public PlayerFallState fallState {get; private set;}
@@ -25,10 +27,11 @@ public class Player : Entity
     public PlayerJumpAttackState jumpAttackState {get; private set;}
     public PlayerDeathState deathState {get; private set;}
     public PlayerCounterAttackState counterAttackState {get; private set;}
+    public PlayerDomainExpansionState domainState {get;private set;}
 #endregion
 
     public Vector2 moveInput {get; private set;}
-
+    public Vector2 mousePosition {get; private set;}
 
     [Header("Movement details")]
     public float moveSpeed = 10f;
@@ -44,7 +47,10 @@ public class Player : Entity
     public float dashSpeed = 20f;
     public float dashDuration = 0.25f;
 
-
+    [Header("Ultimate ability details")]
+    public float riseSpeed = 25f;
+    public float riseMaxDistance = 3f;
+    
 
     [Header("Attack details")]
     public float attackDuration = 0.1f;
@@ -65,7 +71,10 @@ public class Player : Entity
         skillManager = GetComponent<PlayerSkillManager>();
         vfx = GetComponent<PlayerVFX>();
         ui = FindAnyObjectByType<UI>();
+        entityHealth = GetComponent<EntityHealth>();
+        statusHandler = GetComponent<EntityStatusHandler>();
 
+        throwSwordState = new PlayerThrowSwordState(this, stateMachine,"Throw");
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine,"Move");
         fallState = new PlayerFallState(this, stateMachine, "JumpFall");
@@ -77,6 +86,7 @@ public class Player : Entity
         jumpAttackState = new PlayerJumpAttackState(this, stateMachine, "JumpAttack");
         deathState = new PlayerDeathState(this, stateMachine, "Death");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+        domainState = new PlayerDomainExpansionState(this,stateMachine,"JumpFall");
     }
 
     protected override void Start()
@@ -93,10 +103,13 @@ public class Player : Entity
 
 
         input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
+        input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
         
         input.Player.ToolTip.performed += ctx => ui.ToggleCanvas();
         // input.Player.Jump.performed += ctx => Debug.Log(ctx.ReadValueAsButton());
         // input.Player.Jump.canceled += ctx => Debug.Log(ctx.ReadValueAsButton());
+        input.Player.Mouse.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
+        
     }
     private void OnDisable()
     {

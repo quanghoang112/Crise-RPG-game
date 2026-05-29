@@ -22,6 +22,19 @@ public class PlayerState:EntityState
             stateMachine.ChangeState(player.dashState);
             skillManager.dash.SetSkillOnCooldown();
         }
+        if(player.input.Player.UltimateSpell.WasPerformedThisFrame() && skillManager.domainExpansion.CanUseSkill())
+        {
+            if(skillManager.domainExpansion.InstantDomain())
+            {
+                skillManager.domainExpansion.CreateDomain();
+            }
+            else
+            {
+                stateMachine.ChangeState(player.domainState);
+            }
+
+            skillManager.domainExpansion.SetSkillOnCooldown();
+        }
     }
     public override void Enter()
     {

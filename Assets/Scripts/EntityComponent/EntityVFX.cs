@@ -47,7 +47,7 @@ public class EntityVFX : MonoBehaviour
         }
         if(element == ElementType.Ice)
         {
-            Debug.Log("asdasd");
+            // Debug.Log("asdasd");
             StatusVfxCo=StartCoroutine(PlayStatusVfxCo(duration,chillVFX));
         }
         else if (element == ElementType.Fire)

@@ -24,9 +24,7 @@ public class EnemyDeathState : EnemyState
         // rb.gravityScale = 12;
         // enemy.setVelocity(rb.linearVelocity.x, 20f);
         enemyVFX.EnableAttackAlert(false);
-        healthBar.gameObject.SetActive(false);
-        // healthIcon.gameObject.SetActive(false);
-        // healthCanvas.gameObject.SetActive(false);
+        enemy.transform.Find("HealthBarUI").gameObject.SetActive(false);
         stateMachine.swithOffStateMachine();
     }
     public override void Update()

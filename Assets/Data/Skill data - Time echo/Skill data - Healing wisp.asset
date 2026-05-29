@@ -12,9 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb040d088cc7a04e8bd8889cbcb47bd, type: 3}
   m_Name: Skill data - Healing wisp
   m_EditorClassIdentifier: Assembly-CSharp::Skill_DataSO
-  cost: 2
   displayName: Healing wisp
   description: 'asdasdasdasdasdasdadsasd
 
     adsasdasdasd'
   icon: {fileID: -1830470593, guid: 7ae0115109b4a6f42a4f7ad59397d09b, type: 3}
+  cost: 2
+  unlockedByDefault: 0
+  skillType: 1
+  upgradeData:
+    upgradeType: 19
+    cooldown: 0
+    damageScale:
+      physical: 1
+      elemental: 1
+      chillDuration: 3
+      chillSlowMultiplier: 0.2
+      burnDuration: 3
+      burnDamageScale: 1
+      shockDuration: 3
+      shockDamageScale: 1
+      shockCharge: 0.4

@@ -14,7 +14,7 @@ public class EnemyMoveState : EnemyGroundedState
     public override void Update()
     {
         base.Update();
-        enemy.setVelocity(enemy.moveSpeed * enemy.facingDir, enemy.rb.linearVelocity.y);
+        enemy.setVelocity(enemy.GetMoveSpeed() * enemy.facingDir, enemy.rb.linearVelocity.y);
         if(enemy.wallDetected || !enemy.GroundDetected)
         {
             enemy.Flip();

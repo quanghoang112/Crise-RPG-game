@@ -18,16 +18,16 @@ public class UI : MonoBehaviour
             gameObject.SetActive(!isActive);
 
             // Mẹo nhỏ cho Game Designer: Xử lý đóng/mở chuột khi ẩn hiện UI
-            if (!isActive) // Nếu chuẩn bị MỞ Canvas
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else // Nếu chuẩn bị ĐÓNG Canvas để quay lại chơi game
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            // if (!isActive) // Nếu chuẩn bị MỞ Canvas
+            // {
+            //     Cursor.lockState = CursorLockMode.None;
+            //     Cursor.visible = true;
+            // }
+            // else // Nếu chuẩn bị ĐÓNG Canvas để quay lại chơi game
+            // {
+            //     Cursor.lockState = CursorLockMode.Locked;
+            //     Cursor.visible = false;
+            // }
     
         }
     }

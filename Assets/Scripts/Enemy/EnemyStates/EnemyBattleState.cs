@@ -5,6 +5,7 @@ public class EnemyBattleState : EnemyState
 {
     private Transform player;
     private float lastTimeWasInBattle;
+    private Transform lastTarget;
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -21,7 +22,7 @@ public class EnemyBattleState : EnemyState
         if(shouldRetreat())
         {
             Debug.Log("Retreating");
-            rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * -directionToPlayer(),enemy.retreatVelocity.y);
+            rb.linearVelocity = new Vector2(enemy.retreatVelocity.x * enemy.activeSlowMultiplier * -directionToPlayer(),enemy.retreatVelocity.y);
             enemy.handleFlip(directionToPlayer());
             stateTimer = 0.5f;
         }
@@ -30,6 +31,11 @@ public class EnemyBattleState : EnemyState
     public override void Update()
     {
         base.Update();
+        if(enemy.PlayerDetection())
+        {
+            UpdateTargetIfNeeded();
+            updateBattleTimer();
+        }
         if(stateTimer >0f)
         {
             return;
@@ -41,11 +47,24 @@ public class EnemyBattleState : EnemyState
         else
         {
             int direction = directionToPlayer();
-            enemy.setVelocity(enemy.battleMoveSpeed * direction,enemy.rb.linearVelocity.y);
+            enemy.setVelocity(enemy.GetBattleMoveSpeed() * direction,enemy.rb.linearVelocity.y);
         }
         if(battleTimeIsOver())
         {
             stateMachine.ChangeState(enemy.idleState);
+        }
+    }
+
+    private void UpdateTargetIfNeeded()
+    {
+        if(enemy.PlayerDetection() == false)
+            return;
+        Transform newTarget = enemy.PlayerDetection().transform;
+
+        if(newTarget != lastTarget)
+        {
+            lastTarget = newTarget;
+            player = newTarget;
         }
     }
     private void updateBattleTimer() => lastTimeWasInBattle = Time.time;

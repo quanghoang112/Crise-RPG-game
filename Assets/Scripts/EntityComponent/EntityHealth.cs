@@ -14,6 +14,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] protected float maxHp;
     [SerializeField] protected bool isDead;
     [SerializeField] protected float currentHp;
+    public float lastDamageTaken{get; private set;}
 
     [Header("regen health")]
     [SerializeField] private float regenInterval = 1;
@@ -30,15 +31,19 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     public virtual void Awake()
     {
-        maxHp = entityStats.GetMaxHealth();
-        currentHp = maxHp;
-        healthBar = GetComponentInChildren<Slider>();
-        updateHealthBar();
-        InvokeRepeating(nameof(RegenHealth),0, regenInterval);
+        if(entityStats != null)
+        {
+            maxHp = entityStats.GetMaxHealth();
+            currentHp = maxHp;
+            healthBar = GetComponentInChildren<Slider>();
+            updateHealthBar();
+            InvokeRepeating(nameof(RegenHealth),0, regenInterval);
+        }
     }
 
     public virtual void Update()
     {
+        if(entityStats == null) return;
         maxHp = entityStats.GetMaxHealth();
     }
     public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
@@ -55,14 +60,17 @@ public class EntityHealth : MonoBehaviour, IDamagable
         EntityStats attackerStats = damageDealer.GetComponent<EntityStats>();
 
         float armorReduction = attackerStats!= null ? attackerStats.GetArmorReduction() : 0;
-        float takenDamage = damage*(1- entityStats.GetArmorMitigation(armorReduction));
+        float resistance = entityStats != null ? entityStats.GetElementResistance(element) : 0;
+        float mitigation = entityStats != null ? entityStats.GetArmorMitigation(armorReduction) : 0;
 
-        float resistance = entityStats.GetElementResistance(element);
+        float takenDamage = damage*(1- mitigation);
         float takenElementalDamage = elementalDamage*(1-resistance);
 
         takeKnockback(takenDamage,damageDealer);
 
         reduceHp(takenDamage + takenElementalDamage);
+
+        lastDamageTaken = takenDamage + takenElementalDamage;
 
         Debug.Log("Damage:" + damage + ", takenDamage: " + takenDamage + ", elementalDamage: " + elementalDamage + ", takenElemental: " + takenElementalDamage + ", element: " + element);
         return true;
@@ -78,6 +86,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     private bool AttackEvaded()
     {
+        if(entityStats == null) return false;
         float evasionChance = entityStats.GetEvasion();
         return Random.Range(0, 100) < evasionChance;
     }
@@ -148,6 +157,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     }
     private bool isHeavyDamage(float damage)
     {
+        if(entityStats == null) return false;
         return damage >= maxHp * heavyDamageThreshold;
     }
 }

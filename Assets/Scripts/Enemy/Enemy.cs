@@ -37,6 +37,7 @@ public class Enemy : Entity
     public Transform playerCheck;
     
     public Transform player{get;private set;}
+    public float activeSlowMultiplier {get; private set;} = 1;
     
 
     protected override void Awake()
@@ -61,27 +62,27 @@ public class Enemy : Entity
         Player.onPlayerDeath -= handlePlayerDeath;
     }
 
-
+    public float GetMoveSpeed() => moveSpeed * activeSlowMultiplier;
+    public float GetBattleMoveSpeed() => battleMoveSpeed * activeSlowMultiplier;
     protected override IEnumerator slowDownEntityCo(float duration, float slowMultiplier)
     {
-        // base.slowDownEntityCo(float duration, float slowMultiplier);
-        float originalMoveSpeed = moveSpeed;
-        float originalBattleSpeed = battleMoveSpeed;
-        float originalAnimSpeed = anim.speed;
-
-        float speedMultiplier = 1 - slowMultiplier;
-        moveSpeed = moveSpeed * speedMultiplier;
-        battleMoveSpeed = battleMoveSpeed * speedMultiplier;
         
-        // Debug.Log(anim.speed);
-        // Debug.Log(anim.speed * speedMultiplier);
-        anim.speed = anim.speed * speedMultiplier;
+
+        activeSlowMultiplier = 1 - slowMultiplier;
+        
+        anim.speed = anim.speed * activeSlowMultiplier;
 
         yield return new WaitForSeconds(duration);
 
-        moveSpeed = originalMoveSpeed;
-        battleMoveSpeed = originalBattleSpeed;
-        anim.speed = originalAnimSpeed;
+        
+    }
+
+    public override void StopSlowDownEntityBy()
+    {
+        activeSlowMultiplier = 1f;
+        anim.speed = 1f;
+        base.StopSlowDownEntityBy();
+
     }
 
     public void enableCounterWindow(bool enable) => canBeStunned = enable; 

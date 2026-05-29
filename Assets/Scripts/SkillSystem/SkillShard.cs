@@ -167,21 +167,20 @@ public class SkillShard : SkillBase
             currentShard.OnExplode += ForceCooldown;
     }
 
-    public void CreateRawShard()
+    public void CreateRawShard(Transform target = null, bool shardsCanMove = false)
     {
-        bool canMove = Unlocked(SkillUpgradeType.ShardTeleport) || Unlocked(SkillUpgradeType.ShardTeleportHpRewind);
+        bool canMove = shardsCanMove != false ? shardsCanMove : Unlocked(SkillUpgradeType.ShardTeleport) || Unlocked(SkillUpgradeType.ShardTeleportHpRewind);
         // Debug.Log(canMove);
         GameObject shard = Instantiate(shardPrefab, transform.position, Quaternion.identity);
 
         rawShard = shard.GetComponent<SkillObject_Shard>();
-        // rawShard.SetupShard(this, detonateTime, canMove, shardSpeed);
-        rawShard.SetupShard(this);
+        rawShard.SetupShard(this, detonateTime, canMove, shardSpeed, target);
+        // rawShard.SetupShard(this);
+    }
 
-        if(this.damageScaleData == null)
-            Debug.Log("Shard scale damage is null");
-        else
-            Debug.Log("Shard is not null");
-    
+    public void CreateDomainShard()
+    {
+
     }
 
     public float GetDetonateTime()

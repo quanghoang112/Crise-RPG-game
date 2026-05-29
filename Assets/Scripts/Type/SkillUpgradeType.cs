@@ -16,5 +16,26 @@ public enum SkillUpgradeType
     ShardMoveToEnemy,
     ShardTripleCast,
     ShardTeleport,
-    ShardTeleportHpRewind
+    ShardTeleportHpRewind,
+
+    //SwordThrow
+    SwordThrow,
+    SwordThrowSpin,
+    SwordThrowPierce,
+    SwordThrowBounce,
+
+    //TimeEcho
+    TimeEcho,
+    TimeEchoSingleAttack,
+    TimeEchoMultiAttack,
+    TimeEchoChanceToDuplicate,
+    TimeEchoHealWisp,
+    TimeEchoCleanseWisp,
+    TimeEchoCooldownWisp,
+
+
+    //Domain
+    DomainSlowingDown,
+    DomainEchoSpam,
+    DomainShardSpam
 }
