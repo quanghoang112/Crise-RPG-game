@@ -14,6 +14,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] protected float maxHp;
     [SerializeField] protected bool isDead;
     [SerializeField] protected float currentHp;
+    protected bool canTakeDamage = true;
     public float lastDamageTaken{get; private set;}
 
     [Header("regen health")]
@@ -39,6 +40,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
             updateHealthBar();
             InvokeRepeating(nameof(RegenHealth),0, regenInterval);
         }
+        canTakeDamage = true;
     }
 
     public virtual void Update()
@@ -48,7 +50,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     }
     public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
     {
-        if(isDead)
+        if(isDead || !canTakeDamage)
         {
             return false;
         }
@@ -75,6 +77,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
         Debug.Log("Damage:" + damage + ", takenDamage: " + takenDamage + ", elementalDamage: " + elementalDamage + ", takenElemental: " + takenElementalDamage + ", element: " + element);
         return true;
     }
+
+    public void SetCanTakeDamage(bool CanTakeDamage) => this.canTakeDamage = CanTakeDamage;
 
     public void takeKnockback(float takenDamage, Transform damageDealer)
     {
