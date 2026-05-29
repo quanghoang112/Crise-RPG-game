@@ -55,6 +55,7 @@ public class SkillBase : MonoBehaviour
         cooldown = upgradeData.cooldown;
         damageScaleData = upgradeData.damageScale;
         // Debug.Log(damageScaleData.burnDamageScale);
+        ResetCooldown();
     }
 
     public virtual bool CanUseSkill()
@@ -74,5 +75,5 @@ public class SkillBase : MonoBehaviour
     protected bool OnCooldown() => Time.time < lastTimeUsed + cooldown;
     public void SetSkillOnCooldown() => lastTimeUsed = Time.time;
     public void ReduceCooldownBy (float cooldownReduction) => lastTimeUsed = lastTimeUsed + cooldownReduction;
-    public void ResetCooldown() => lastTimeUsed=Time.time;
+    public void ResetCooldown() => lastTimeUsed=Time.time - cooldown;
 }

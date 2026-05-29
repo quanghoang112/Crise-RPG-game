@@ -55,6 +55,9 @@ public class PlayerState:EntityState
             return false;
         if(player.wallDetected)
             return false;
+        if(stateMachine.currentState == player.dashState || stateMachine.currentState == player.domainState)
+            return false;
+        
         return true;
     }
 } 

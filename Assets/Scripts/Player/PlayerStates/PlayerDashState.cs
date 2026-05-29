@@ -17,6 +17,7 @@ public class PlayerDashState : PlayerState
         dashDir = player.moveInput.x != 0?(int)Mathf.Sign(player.moveInput.x):player.facingDir;
         CancelDashIfNeeded();
         // Implementation for dash enter
+        player.entityHealth.SetCanTakeDamage(false);
     }
     public override void Update()
     {
@@ -40,6 +41,7 @@ public class PlayerDashState : PlayerState
         skillManager.dash.OnEndEffect();
         // Implementation for dash exit
         player.setVelocity(0,0);
+        player.entityHealth.SetCanTakeDamage(true);
     }
 
     private void CancelDashIfNeeded()
