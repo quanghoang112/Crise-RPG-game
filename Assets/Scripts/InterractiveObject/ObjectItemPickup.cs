@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 public class ObjectItemPickup : MonoBehaviour
 {
     private SpriteRenderer sr;
-    [SerializeField] private ItemDataSo itemData;
+    [SerializeField] private ItemDataSO itemData;
 
     private InventoryItem itemToAdd;
     private InventoryBase inventory;
@@ -28,7 +28,11 @@ public class ObjectItemPickup : MonoBehaviour
         
         inventory = collision.GetComponent<InventoryBase>();
 
-        if(inventory != null && inventory.CanAddItem())
+        if(inventory == null)   return;
+
+        bool canAddItem = inventory.CanAddItem() || inventory.FindStackable(itemToAdd) != null;
+
+        if(canAddItem)
         {
             inventory.AddItem(itemToAdd);
             Destroy(gameObject);

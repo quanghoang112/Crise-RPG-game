@@ -3,10 +3,14 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     public UI_SkillToolTip skillToolTip;
+    public UI_ItemToolTip itemToolTip;
+    public UI_StatsToolTip statsToolTip;
 
     private void Awake()
     {
         skillToolTip = GetComponentInChildren<UI_SkillToolTip>();
+        itemToolTip = GetComponentInChildren<UI_ItemToolTip>();
+        statsToolTip = GetComponentInChildren<UI_StatsToolTip>();
     }
 
     public void ToggleCanvas()

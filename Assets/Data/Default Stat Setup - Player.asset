@@ -16,10 +16,10 @@ MonoBehaviour:
   Agility: 0
   Intelligence: 0
   Vitality: 0
-  maxHealth: 100
+  maxHealth: 1000
   healthRegen: 0
   attackSpeed: 1
-  damage: 10
+  damage: 100
   critChance: 0
   critPower: 150
   armorReduction: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   iceDamage: 0
   lightningDamage: 0
   armor: 0
-  evasion: 0
+  evasion: 100
   fireResistance: 0
   iceResistance: 0
   lightningResistance: 0

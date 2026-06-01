@@ -20,5 +20,6 @@ public enum StatsType
     evasion,
     iceResistance,
     fireResistance,
-    lightningResistance
+    lightningResistance,
+    ElementalDamage
 }

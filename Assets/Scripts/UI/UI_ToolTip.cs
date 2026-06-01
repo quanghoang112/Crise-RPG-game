@@ -9,7 +9,7 @@ public class UI_ToolTip : MonoBehaviour
     protected virtual void Awake()
     {
         rect = GetComponent<RectTransform>();
-        rect.position = new Vector2(9999,9999);
+        // rect.position = new Vector2(9999,9999);
     }
 
     public virtual void showToolTip(bool show, RectTransform targetRect)

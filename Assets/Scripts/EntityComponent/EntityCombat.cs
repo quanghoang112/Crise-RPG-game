@@ -10,8 +10,8 @@ public class EntityCombat : MonoBehaviour
 
     public DamageScaleData basicAttackScale;
 
-    public float damage;
-    public float elementalDamage;
+    // public float damage;
+    // public float elementalDamage;
     public bool isCrit;
 
     [Header("Target detection")]
@@ -28,19 +28,19 @@ public class EntityCombat : MonoBehaviour
     {
         entityVFX = GetComponent<EntityVFX>();
         entityStats = GetComponent<EntityStats>();
-        damage = entityStats.GetPhysicalDamage(out isCrit);
+        // damage = entityStats.GetPhysicalDamage(out isCrit);
     }
 
     public void Update()
     {
-        damage = entityStats.GetPhysicalDamage(out isCrit);
+        // damage = entityStats.GetPhysicalDamage(out isCrit);
     }
     public void performAttack()
     {
         handleTargetDetection();
 
-        damage = entityStats.GetPhysicalDamage(out isCrit);
-        elementalDamage = entityStats.GetElementalDamage(out ElementType element);   
+        float damage = entityStats.GetPhysicalDamage(out isCrit);
+        float elementalDamage = entityStats.GetElementalDamage(out ElementType element);   
 
         foreach(var targetCollider in targetColliders)
         {

@@ -24,7 +24,7 @@ public class EntityStats : MonoBehaviour
         float iceDamage = offenseStats.iceDamage.GetValue();
         float lightningDamage = offenseStats.lightningDamage.GetValue();
         float bonusElemenetalDamage = majorStats.Agility.GetValue();
-        
+        // Debug.Log($"Fire: {fireDamage}; Ice: {iceDamage}; electrify: {lightningDamage}");
         float highestDamage = 0;
         if(highestDamage < fireDamage)
         {
@@ -86,6 +86,7 @@ public class EntityStats : MonoBehaviour
     public float GetPhysicalDamage(out bool isCrit, float scaleFactor = 1)
     {
         float baseDamage = offenseStats.damage.GetValue();
+        // Debug.Log($"Base dame: {baseDamage}");
         float strengthDamage = majorStats.Strength.GetValue() * 1f;
         float Damage = baseDamage + strengthDamage;
 
@@ -101,6 +102,11 @@ public class EntityStats : MonoBehaviour
         float finalDamage = isCrit ? Damage * (1 + critPower) : Damage;
         return finalDamage*scaleFactor;
     }
+
+    public float GetBaseDamage() => offenseStats.damage.GetValue() + majorStats.Strength.GetValue();
+    public float GetCritChance() => offenseStats.critChance.GetValue() + majorStats.Agility.GetValue() * .3f;
+    public float GetCritPower() => offenseStats.critPower.GetValue() + majorStats.Strength.GetValue() * .5f;
+    public float GetBaseArmor() => defenseStats.armor.GetValue() + majorStats.Vitality.GetValue();
 
     public float GetArmorMitigation(float armorReduction)
     {
@@ -162,6 +168,7 @@ public class EntityStats : MonoBehaviour
         }
     }
 
+    [ContextMenu("ApplyDefaultStatSetup")]
     public void ApplyDefaultStatSetup()
     {
         if(defaultStatSetup == null)
