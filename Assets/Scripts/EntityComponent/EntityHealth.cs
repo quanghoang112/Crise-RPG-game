@@ -1,9 +1,13 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EntityHealth : MonoBehaviour, IDamagable
 {
+    public event Action OnTakingDamage;
+
+
     private Slider healthBar;
     private EntityVFX entityVFX => GetComponent<EntityVFX>();
     private Entity entity => GetComponent<Entity>();
@@ -13,7 +17,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     [SerializeField] protected float maxHp;
     [SerializeField] protected bool isDead;
-    [SerializeField] protected float currentHp;
+    [SerializeField] public float currentHp;
     protected bool canTakeDamage = true;
     public float lastDamageTaken{get; private set;}
 
@@ -74,6 +78,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         lastDamageTaken = takenDamage + takenElementalDamage;
 
+        OnTakingDamage?.Invoke();
+
         Debug.Log("Damage:" + damage + ", takenDamage: " + takenDamage + ", elementalDamage: " + elementalDamage + ", takenElemental: " + takenElementalDamage + ", element: " + element);
         return true;
     }
@@ -92,7 +98,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     {
         if(entityStats == null) return false;
         float evasionChance = entityStats.GetEvasion();
-        return Random.Range(0, 100) < evasionChance;
+        return UnityEngine.Random.Range(0, 100) < evasionChance;
     }
 
     public void IncreaseHealth (float healAmount)
@@ -144,7 +150,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     public void SetHealthToPercent(float percent)
     {
-        currentHp = maxHp * Mathf.Clamp01(percent);
+        currentHp = entityStats.GetMaxHealth() * Mathf.Clamp01(percent);
         updateHealthBar();
     }
     private void updateHealthBar()

@@ -14,9 +14,34 @@ public class InventoryBase : MonoBehaviour
     {
         
     }
+
+    public void TryUseItem(InventoryItem itemToUse)
+    {
+        InventoryItem consumable = itemList.Find(item => item.itemId == itemToUse.itemId);
+
+        if(consumable == null)
+        {
+            // Debug.Log("null");
+            return;
+        }
+        
+        consumable.itemEffect.ExecuteEffect();
+
+        if(consumable.stackSize > 1)
+            consumable.RemoveStack();
+        else
+            RemoveOneItem(consumable);
+
+        OnInventoryChange?.Invoke();
+    }
     
-    public bool CanAddItem() => itemList.Count < maxInventorySize;
-    
+    public bool CanAddItem(InventoryItem itemToAdd) 
+    {
+        bool hasStackable = FindStackable(itemToAdd) != null;
+
+        return hasStackable || itemList.Count < maxInventorySize;
+    }
+
     public InventoryItem FindStackable(InventoryItem itemToAdd)
     {
         List<InventoryItem> stackableItems = itemList.FindAll(item => item.itemData == itemToAdd.itemData);
@@ -29,17 +54,7 @@ public class InventoryBase : MonoBehaviour
         return null;
     }
     
-    // public bool CanAddToStack (InventoryItem itemToAdd)
-    // {
-    //     List<InventoryItem> stackableItems = itemList.FindAll(item => item.itemData == itemToAdd.itemData);
-
-    //     foreach (var stack in stackableItems)
-    //     {
-    //         if(stack.CanAddStack())
-    //             return true;
-    //     }
-    //     return false;
-    // }
+    public void OnTriggerUpdateUI() => OnInventoryChange?.Invoke();
 
     public void EquipItem(InventoryItem item)
     {
@@ -60,9 +75,15 @@ public class InventoryBase : MonoBehaviour
         OnInventoryChange?.Invoke();
     }
 
-    public void RemoveItem(InventoryItem itemToRemove)
+    public void RemoveOneItem(InventoryItem itemToRemove)
     {
-        itemList.Remove(FindItem(itemToRemove.itemData));
+        InventoryItem itemInInventory = itemList.Find(item => item == itemToRemove);
+
+        if(itemInInventory.stackSize > 1)
+            itemInInventory.RemoveStack();
+        else
+            itemList.Remove(itemToRemove);
+
         OnInventoryChange?.Invoke();
     }
 

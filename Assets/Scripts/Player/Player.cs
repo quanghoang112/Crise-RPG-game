@@ -13,6 +13,10 @@ public class Player : Entity
     public UI ui;
     public EntityHealth entityHealth {get; private set;}
     public EntityStatusHandler statusHandler{get;private set;}
+    public PlayerCombat playerCombat{get;private set;}
+
+
+
 
 #region State Variable
     public PlayerThrowSwordState throwSwordState{get; private set;}
@@ -61,8 +65,7 @@ public class Player : Entity
 
     [Header("Counter Attack details")]
     public float counterAttackDuration = 1f;
-
-
+   
     protected override void Awake()
     {
         base.Awake();
@@ -73,6 +76,8 @@ public class Player : Entity
         ui = FindAnyObjectByType<UI>();
         entityHealth = GetComponent<EntityHealth>();
         statusHandler = GetComponent<EntityStatusHandler>();
+        playerCombat = GetComponent<PlayerCombat>();
+
 
         throwSwordState = new PlayerThrowSwordState(this, stateMachine,"Throw");
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -106,16 +111,42 @@ public class Player : Entity
         input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
         
         input.Player.ToolTip.performed += ctx => ui.ToggleCanvas();
+        input.Player.CanvasTab.performed += ctx => ui.changeTab(ctx.ReadValue<float>());
         // input.Player.Jump.performed += ctx => Debug.Log(ctx.ReadValueAsButton());
         // input.Player.Jump.canceled += ctx => Debug.Log(ctx.ReadValueAsButton());
         input.Player.Mouse.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
-        
+        input.Player.Interact.performed += ctx => TryInteract();
+
     }
     private void OnDisable()
     {
         input.Disable();
     }
 
+    private void TryInteract()
+    {
+        Transform closest = null;
+        float closestDistance = Mathf.Infinity;
+        Collider2D[] objectsAround = Physics2D.OverlapCircleAll(transform.position, 1f);
+
+        foreach (var target in objectsAround)
+        {
+            IInteractable interactable = target.GetComponent<IInteractable>();
+            if(interactable == null)    continue;
+
+            float distance = Vector2.Distance(transform.position, target.transform.position);
+
+            if(distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = target.transform;
+            }
+        }
+
+        if(closest == null) return;
+
+        closest.GetComponent<IInteractable>().Interact();
+    }
 
     public void TeleportPLayer(Vector3 position) => transform.position = position;
 

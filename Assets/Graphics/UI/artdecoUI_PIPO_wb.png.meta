@@ -116,13 +116,13 @@ TextureImporter:
       name: artdecoUI_PIPO_wb_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1500
-        height: 915
+        x: 1073
+        y: 583
+        width: 48
+        height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 14, y: 12, z: 12, w: 14}
       customData: 
       outline: []
       physicsShape: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b2edfb0d9d0f77a42aa80d042a01f87d
     internalID: 0
     vertices: []
     indices: 

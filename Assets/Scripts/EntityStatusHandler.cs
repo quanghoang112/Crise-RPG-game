@@ -125,6 +125,8 @@ public class EntityStatusHandler : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         currEffect = ElementType.None;
+
+        entity.StopSlowDownEntityBy();
     }
     private IEnumerator ElectrifyEffectCo(float duration)
     {

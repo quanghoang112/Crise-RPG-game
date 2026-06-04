@@ -1,9 +1,12 @@
-using System.Runtime.InteropServices;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityCombat : MonoBehaviour
 {
+    public event Action<float> OnDoingPhysicalDamage;
+
+
     public Collider2D[] targetColliders;
     public EntityVFX entityVFX;
     public EntityStats entityStats;
@@ -57,6 +60,8 @@ public class EntityCombat : MonoBehaviour
 
             if(targetHealth.TakeDamage(damage,elementalDamage,element,transform))
             {
+                OnDoingPhysicalDamage?.Invoke(damage);
+
                 statusHandler?.ApplyStatusEffect(element, attackData.effectData);
                 // applyStatusEffect(targetCollider.transform,element);
                 entityVFX.updateOnHitVFXColor(element);

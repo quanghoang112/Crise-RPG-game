@@ -16,6 +16,7 @@ public class UI_SkillTree : MonoBehaviour
         UpdateAllConnections();
     }
 
+
     public void RemoveSkillPoints(int cost) => skillPoints -= cost;
 
     public bool EnoughSkillPoints(int cost) => skillPoints >= cost;

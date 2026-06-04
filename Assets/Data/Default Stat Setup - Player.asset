@@ -27,7 +27,7 @@ MonoBehaviour:
   iceDamage: 0
   lightningDamage: 0
   armor: 0
-  evasion: 100
+  evasion: 0
   fireResistance: 0
   iceResistance: 0
   lightningResistance: 0

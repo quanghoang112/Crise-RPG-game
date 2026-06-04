@@ -27,13 +27,18 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if(itemInSlot == null)
+        if(itemInSlot == null || itemInSlot.itemData.itemType == ItemType.Material)
             return;
         
-        inventory.TryEquipItem(itemInSlot);
-
-        if(itemInSlot == null)
-            ui.itemToolTip.showToolTip(false,null);
+        if(itemInSlot.itemData.itemType == ItemType.Consumable)
+        {
+            if(itemInSlot.itemEffect.CanBeUsed() == false)  return;
+            // Debug.Log("Try use consumable item");
+            inventory.TryUseItem(itemInSlot);
+        }
+        else
+            inventory.TryEquipItem(itemInSlot);
+        ui.itemToolTip.showToolTip(false,null);
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)

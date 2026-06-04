@@ -6,15 +6,10 @@ public class ObjectItemPickup : MonoBehaviour
     private SpriteRenderer sr;
     [SerializeField] private ItemDataSO itemData;
 
-    private InventoryItem itemToAdd;
-    private InventoryBase inventory;
+    // private InventoryBase inventory;
 
 
-    private void Awake()
-    {
-        itemToAdd = new InventoryItem(itemData);
-    }
-
+    
     private void OnValidate()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -24,15 +19,22 @@ public class ObjectItemPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        InventoryItem itemToAdd = new InventoryItem(itemData);
+
+        if(collision.GetComponent<Player>() == null)    return;
         Debug.Log("Player picked up item - " + itemData.itemName);
         
-        inventory = collision.GetComponent<InventoryBase>();
+        InventoryPlayer inventory = collision.GetComponent<InventoryPlayer>();
+        InventoryStorage storage = inventory.storage;
 
-        if(inventory == null)   return;
-
-        bool canAddItem = inventory.CanAddItem() || inventory.FindStackable(itemToAdd) != null;
-
-        if(canAddItem)
+        if(itemData.itemType == ItemType.Material)
+        {
+            storage.AddMaterialToStash(itemToAdd);
+            Destroy(gameObject);
+            return;
+        }
+        
+        if(inventory.CanAddItem(itemToAdd))
         {
             inventory.AddItem(itemToAdd);
             Destroy(gameObject);

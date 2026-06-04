@@ -1,4 +1,5 @@
 // using System;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UIElements;
@@ -11,6 +12,12 @@ public class EntityStats : MonoBehaviour
     public StatMajor majorStats;
     public StatOffense offenseStats;
     public StatDefense defenseStats;
+
+
+    protected virtual void Awake()
+    {
+        
+    }
 
     public AttackData GetAttackData(DamageScaleData scaleData)
     {

@@ -8,4 +8,11 @@ public class ItemDataSO : ScriptableObject
     public Sprite itemIcon;
     public ItemType itemType;
     public int maxStackSize = 1;
+
+    [Header ("Item effect")]
+    public ItemEffectDataSO itemEffect;
+
+    [Header("Craft details")]
+    public InventoryItem[] craftRecipe;
+    
 }

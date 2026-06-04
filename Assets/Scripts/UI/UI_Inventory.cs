@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
 {
-    private UI_ItemSlot[] uiItemSlots;
     private UI_EquipSlot[] uiEquipSlots;
     private InventoryPlayer inventory;
 
-    [SerializeField] private Transform uiItemSlotParent;
+    [SerializeField] private UI_ItemSlotParent inventorySlotsParent;
     [SerializeField] private Transform uiEquipSlotParent;
 
     private void Awake()
     {
-        uiItemSlots = uiItemSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         uiEquipSlots = uiEquipSlotParent.GetComponentsInChildren<UI_EquipSlot>();
         
         inventory = FindAnyObjectByType<InventoryPlayer>();
@@ -25,7 +23,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void UpdateUI()
     {
-        UpdateInventorySlots();
+        inventorySlotsParent.UpdateSlots(inventory.itemList);
         UpdateEquipmentSlots();
     }
     private void UpdateEquipmentSlots() // kiểm tra slot để vẽ UI
@@ -42,23 +40,6 @@ public class UI_Inventory : MonoBehaviour
             }
             else
                 uiEquipSlots[i].UpdateSlot(playerEquipSlot.equipedItem);
-        }
-    }
-
-    private void UpdateInventorySlots()
-    {
-        List<InventoryItem> ItemList = inventory.itemList; // số lượng item thực sự player sở hữu
-
-        for(int i = 0; i<uiItemSlots.Length; i++) // vẽ item_ui lên các ô có sẵn
-        {
-            if(i<ItemList.Count)
-            {
-                uiItemSlots[i].UpdateSlot(ItemList[i]);
-            }
-            else
-            {
-                uiItemSlots[i].UpdateSlot(null);
-            }
         }
     }
 
