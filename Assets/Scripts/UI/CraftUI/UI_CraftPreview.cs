@@ -31,10 +31,9 @@ public class UI_CraftPreview : MonoBehaviour
             return;
         }
 
-        if(storage.HasEnoughMaterials(itemToCraft) && storage.playerInventory.CanAddItem(itemToCraft))
+        if(storage.CanCraftItem(itemToCraft))
         {
-            storage.ConsumeMaterials(itemToCraft);
-            storage.playerInventory.AddItem(itemToCraft);
+            storage.CraftItem(itemToCraft);
         }
 
         UpdateCraftPreviewSlots();
@@ -61,7 +60,7 @@ public class UI_CraftPreview : MonoBehaviour
         {
             InventoryItem requiredItem = itemToCraft.itemData.craftRecipe[i];
             int avaliableAmount = storage.GetAvailableAmountOf(requiredItem.itemData);
-            int requiredAmount = itemToCraft.stackSize;
+            int requiredAmount = requiredItem.stackSize;
 
 
             craftPreviewSlots[i].gameObject.SetActive(true);

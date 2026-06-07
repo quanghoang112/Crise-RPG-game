@@ -12,6 +12,7 @@ public class UI_SkillToolTip : UI_ToolTip
 
     [SerializeField] private TextMeshProUGUI skillName;
     [SerializeField] private TextMeshProUGUI skillDescription;
+    [SerializeField] private TextMeshProUGUI skillCooldown;
     [SerializeField] private TextMeshProUGUI skillRequirement;
 
     [Space]
@@ -26,7 +27,7 @@ public class UI_SkillToolTip : UI_ToolTip
     {
         base.Awake();
         ui = GetComponentInParent<UI>();
-        skillTree = ui.GetComponentInChildren<UI_SkillTree>();
+        skillTree = ui.GetComponentInChildren<UI_SkillTree>(true);
 
     }
 
@@ -35,16 +36,21 @@ public class UI_SkillToolTip : UI_ToolTip
         base.showToolTip(show, targetRect);
     }
 
-    public void showToolTip(bool show, RectTransform targetRect, UI_TreeNode node)
+    public void showToolTip(bool show, RectTransform targetRect,Skill_DataSO skillData, UI_TreeNode node)
     {
         base.showToolTip(show, targetRect);
 
         if(show == false)   return;
 
-        Skill_DataSO skillData = node.skillData;
-
         skillName.text = skillData.displayName;
         skillDescription.text = skillData.description;
+        skillCooldown.text = $"Cooldown: {skillData.upgradeData.cooldown}s";
+
+        if(node == null)
+        {
+            skillRequirement.text = "";
+            return;
+        }
 
         string skillLockedText = $"<Color={importantInfoHex}>- {lockedSkillText} </color>";
 
@@ -53,9 +59,16 @@ public class UI_SkillToolTip : UI_ToolTip
 
     public void lockedSkillEffect()
     {
+        StopLockedSkillEffect();
+
+        textEffectCo = StartCoroutine(TextBlinkEffectCo(skillRequirement, .15f, 3));
+    }
+
+    public void StopLockedSkillEffect()
+    {
         if(textEffectCo != null)
             StopCoroutine(textEffectCo);
-        textEffectCo = StartCoroutine(TextBlinkEffectCo(skillRequirement, .15f, 3));
+        
     }
 
     private string GetRequirements(int skillCost, UI_TreeNode[] neededNodes, UI_TreeNode[] conflictNodes)

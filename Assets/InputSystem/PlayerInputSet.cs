@@ -147,15 +147,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ToolTip"",
-                    ""type"": ""Button"",
-                    ""id"": ""ff044b79-a61f-416b-be29-7985e4d72575"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""RangeAttack"",
                     ""type"": ""Button"",
                     ""id"": ""5e9032a2-4398-426e-8be2-38e0d4f7c34d"",
@@ -183,18 +174,27 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CanvasTab"",
-                    ""type"": ""Value"",
-                    ""id"": ""5137a420-3d16-48a7-bf74-2505592f10f9"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""f1aa63d7-fc3e-479f-a920-e6f81660869a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickItemSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f34accc-a25f-45b8-9876-1e589d6e393c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickItemSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef79b749-2d4d-4396-a1a4-2ea9552fb3df"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -325,17 +325,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cc533fd6-93bd-44cb-87ed-f21bd8622182"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard & Mouse"",
-                    ""action"": ""ToolTip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""eae66fd9-5608-40f0-a84d-083c6b71faf3"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -368,8 +357,107 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""a92cd0b6-4e3b-433f-9435-f18ca3f13e32"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c34ac36-2378-4ee8-815a-e7c5541e818f"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""QuickItemSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""245de88a-8608-439a-b2e6-93ed9dbd647a"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""QuickItemSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""50801da1-15c0-4916-9694-c38393fc52e4"",
+            ""actions"": [
+                {
+                    ""name"": ""OptionUIToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""65249227-9654-44c4-a839-2b3bb657959d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CanvasToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7406945-0004-4135-9978-9d069ce39cac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CanvasTab"",
+                    ""type"": ""Value"",
+                    ""id"": ""c25c3018-e6ac-406b-93e1-a13e7270b39d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AlternativeInput"",
+                    ""type"": ""Button"",
+                    ""id"": ""faa5aa0c-3680-467d-a781-01b32087a09f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""76de5446-e249-4b31-8d3d-e800afe83e88"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""OptionUIToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4c3c133-76e4-432c-b11b-c30a608d74ea"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""CanvasToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
-                    ""id"": ""da0b779a-06b8-4e88-9dba-454301e5513b"",
+                    ""id"": ""adc7b9ba-ec3b-48db-9622-c0d16763d382"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -380,7 +468,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""aeeff79e-6d95-4767-b73f-25c407ec3041"",
+                    ""id"": ""8a5fe5a6-9b37-4c78-86c7-b0b1bc7b6265"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -391,7 +479,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""17affa0a-3782-4603-9b85-28bdd3a22f61"",
+                    ""id"": ""33cf7e6c-dd7b-4830-a886-507c58925ddd"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -402,12 +490,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a92cd0b6-4e3b-433f-9435-f18ca3f13e32"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""3829e569-1eab-4865-942a-ba99434a465a"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
-                    ""action"": ""Interact"",
+                    ""action"": ""AlternativeInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -441,17 +529,24 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_CounterAttack = m_Player.FindAction("CounterAttack", throwIfNotFound: true);
         m_Player_Spell = m_Player.FindAction("Spell", throwIfNotFound: true);
-        m_Player_ToolTip = m_Player.FindAction("ToolTip", throwIfNotFound: true);
         m_Player_RangeAttack = m_Player.FindAction("RangeAttack", throwIfNotFound: true);
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
         m_Player_UltimateSpell = m_Player.FindAction("Ultimate Spell", throwIfNotFound: true);
-        m_Player_CanvasTab = m_Player.FindAction("CanvasTab", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_QuickItemSlot1 = m_Player.FindAction("QuickItemSlot1", throwIfNotFound: true);
+        m_Player_QuickItemSlot2 = m_Player.FindAction("QuickItemSlot2", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_OptionUIToggle = m_UI.FindAction("OptionUIToggle", throwIfNotFound: true);
+        m_UI_CanvasToggle = m_UI.FindAction("CanvasToggle", throwIfNotFound: true);
+        m_UI_CanvasTab = m_UI.FindAction("CanvasTab", throwIfNotFound: true);
+        m_UI_AlternativeInput = m_UI.FindAction("AlternativeInput", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputSet.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputSet.UI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -533,12 +628,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_CounterAttack;
     private readonly InputAction m_Player_Spell;
-    private readonly InputAction m_Player_ToolTip;
     private readonly InputAction m_Player_RangeAttack;
     private readonly InputAction m_Player_Mouse;
     private readonly InputAction m_Player_UltimateSpell;
-    private readonly InputAction m_Player_CanvasTab;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_QuickItemSlot1;
+    private readonly InputAction m_Player_QuickItemSlot2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -575,10 +670,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Spell => m_Wrapper.m_Player_Spell;
         /// <summary>
-        /// Provides access to the underlying input action "Player/ToolTip".
-        /// </summary>
-        public InputAction @ToolTip => m_Wrapper.m_Player_ToolTip;
-        /// <summary>
         /// Provides access to the underlying input action "Player/RangeAttack".
         /// </summary>
         public InputAction @RangeAttack => m_Wrapper.m_Player_RangeAttack;
@@ -591,13 +682,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UltimateSpell => m_Wrapper.m_Player_UltimateSpell;
         /// <summary>
-        /// Provides access to the underlying input action "Player/CanvasTab".
-        /// </summary>
-        public InputAction @CanvasTab => m_Wrapper.m_Player_CanvasTab;
-        /// <summary>
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/QuickItemSlot1".
+        /// </summary>
+        public InputAction @QuickItemSlot1 => m_Wrapper.m_Player_QuickItemSlot1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/QuickItemSlot2".
+        /// </summary>
+        public InputAction @QuickItemSlot2 => m_Wrapper.m_Player_QuickItemSlot2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -642,9 +737,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Spell.started += instance.OnSpell;
             @Spell.performed += instance.OnSpell;
             @Spell.canceled += instance.OnSpell;
-            @ToolTip.started += instance.OnToolTip;
-            @ToolTip.performed += instance.OnToolTip;
-            @ToolTip.canceled += instance.OnToolTip;
             @RangeAttack.started += instance.OnRangeAttack;
             @RangeAttack.performed += instance.OnRangeAttack;
             @RangeAttack.canceled += instance.OnRangeAttack;
@@ -654,12 +746,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @UltimateSpell.started += instance.OnUltimateSpell;
             @UltimateSpell.performed += instance.OnUltimateSpell;
             @UltimateSpell.canceled += instance.OnUltimateSpell;
-            @CanvasTab.started += instance.OnCanvasTab;
-            @CanvasTab.performed += instance.OnCanvasTab;
-            @CanvasTab.canceled += instance.OnCanvasTab;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @QuickItemSlot1.started += instance.OnQuickItemSlot1;
+            @QuickItemSlot1.performed += instance.OnQuickItemSlot1;
+            @QuickItemSlot1.canceled += instance.OnQuickItemSlot1;
+            @QuickItemSlot2.started += instance.OnQuickItemSlot2;
+            @QuickItemSlot2.performed += instance.OnQuickItemSlot2;
+            @QuickItemSlot2.canceled += instance.OnQuickItemSlot2;
         }
 
         /// <summary>
@@ -689,9 +784,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Spell.started -= instance.OnSpell;
             @Spell.performed -= instance.OnSpell;
             @Spell.canceled -= instance.OnSpell;
-            @ToolTip.started -= instance.OnToolTip;
-            @ToolTip.performed -= instance.OnToolTip;
-            @ToolTip.canceled -= instance.OnToolTip;
             @RangeAttack.started -= instance.OnRangeAttack;
             @RangeAttack.performed -= instance.OnRangeAttack;
             @RangeAttack.canceled -= instance.OnRangeAttack;
@@ -701,12 +793,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @UltimateSpell.started -= instance.OnUltimateSpell;
             @UltimateSpell.performed -= instance.OnUltimateSpell;
             @UltimateSpell.canceled -= instance.OnUltimateSpell;
-            @CanvasTab.started -= instance.OnCanvasTab;
-            @CanvasTab.performed -= instance.OnCanvasTab;
-            @CanvasTab.canceled -= instance.OnCanvasTab;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @QuickItemSlot1.started -= instance.OnQuickItemSlot1;
+            @QuickItemSlot1.performed -= instance.OnQuickItemSlot1;
+            @QuickItemSlot1.canceled -= instance.OnQuickItemSlot1;
+            @QuickItemSlot2.started -= instance.OnQuickItemSlot2;
+            @QuickItemSlot2.performed -= instance.OnQuickItemSlot2;
+            @QuickItemSlot2.canceled -= instance.OnQuickItemSlot2;
         }
 
         /// <summary>
@@ -740,6 +835,135 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_OptionUIToggle;
+    private readonly InputAction m_UI_CanvasToggle;
+    private readonly InputAction m_UI_CanvasTab;
+    private readonly InputAction m_UI_AlternativeInput;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "UI".
+    /// </summary>
+    public struct UIActions
+    {
+        private @PlayerInputSet m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public UIActions(@PlayerInputSet wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "UI/OptionUIToggle".
+        /// </summary>
+        public InputAction @OptionUIToggle => m_Wrapper.m_UI_OptionUIToggle;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/CanvasToggle".
+        /// </summary>
+        public InputAction @CanvasToggle => m_Wrapper.m_UI_CanvasToggle;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/CanvasTab".
+        /// </summary>
+        public InputAction @CanvasTab => m_Wrapper.m_UI_CanvasTab;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/AlternativeInput".
+        /// </summary>
+        public InputAction @AlternativeInput => m_Wrapper.m_UI_AlternativeInput;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="UIActions" />
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @OptionUIToggle.started += instance.OnOptionUIToggle;
+            @OptionUIToggle.performed += instance.OnOptionUIToggle;
+            @OptionUIToggle.canceled += instance.OnOptionUIToggle;
+            @CanvasToggle.started += instance.OnCanvasToggle;
+            @CanvasToggle.performed += instance.OnCanvasToggle;
+            @CanvasToggle.canceled += instance.OnCanvasToggle;
+            @CanvasTab.started += instance.OnCanvasTab;
+            @CanvasTab.performed += instance.OnCanvasTab;
+            @CanvasTab.canceled += instance.OnCanvasTab;
+            @AlternativeInput.started += instance.OnAlternativeInput;
+            @AlternativeInput.performed += instance.OnAlternativeInput;
+            @AlternativeInput.canceled += instance.OnAlternativeInput;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="UIActions" />
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @OptionUIToggle.started -= instance.OnOptionUIToggle;
+            @OptionUIToggle.performed -= instance.OnOptionUIToggle;
+            @OptionUIToggle.canceled -= instance.OnOptionUIToggle;
+            @CanvasToggle.started -= instance.OnCanvasToggle;
+            @CanvasToggle.performed -= instance.OnCanvasToggle;
+            @CanvasToggle.canceled -= instance.OnCanvasToggle;
+            @CanvasTab.started -= instance.OnCanvasTab;
+            @CanvasTab.performed -= instance.OnCanvasTab;
+            @CanvasTab.canceled -= instance.OnCanvasTab;
+            @AlternativeInput.started -= instance.OnAlternativeInput;
+            @AlternativeInput.performed -= instance.OnAlternativeInput;
+            @AlternativeInput.canceled -= instance.OnAlternativeInput;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
+        /// </summary>
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
+    /// </summary>
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -803,13 +1027,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpell(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ToolTip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnToolTip(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "RangeAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -831,6 +1048,49 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUltimateSpell(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "QuickItemSlot1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQuickItemSlot1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "QuickItemSlot2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQuickItemSlot2(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+    public interface IUIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "OptionUIToggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOptionUIToggle(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CanvasToggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCanvasToggle(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "CanvasTab" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -838,11 +1098,11 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCanvasTab(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "AlternativeInput" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteract(InputAction.CallbackContext context);
+        void OnAlternativeInput(InputAction.CallbackContext context);
     }
 }

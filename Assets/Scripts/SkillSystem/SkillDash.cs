@@ -42,5 +42,6 @@ public class SkillDash : SkillBase
     private void CreateClone()
     {
         Debug.Log("Create time echo!");
+        skillManager.timeEcho.CreateTimeEcho();
     }
 }

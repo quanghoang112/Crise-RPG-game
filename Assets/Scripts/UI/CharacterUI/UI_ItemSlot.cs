@@ -15,10 +15,11 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
 
     [Header("UI Slot Setup")]
-    [SerializeField] private Image itemIcon;
-    [SerializeField] private TextMeshProUGUI itemStackSize;
+    [SerializeField] protected GameObject defaultIcon;
+    [SerializeField] protected Image itemIcon;
+    [SerializeField] protected TextMeshProUGUI itemStackSize;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         inventory = FindAnyObjectByType<InventoryPlayer>();
         ui = GetComponentInParent<UI>();
@@ -30,9 +31,15 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if(itemInSlot == null || itemInSlot.itemData.itemType == ItemType.Material)
             return;
         
+        bool alternativeInput = Input.GetKey(KeyCode.LeftControl);
+
+        if(alternativeInput)
+        {
+            inventory.RemoveOneItem(itemInSlot);
+        }
+
         if(itemInSlot.itemData.itemType == ItemType.Consumable)
         {
-            if(itemInSlot.itemEffect.CanBeUsed() == false)  return;
             // Debug.Log("Try use consumable item");
             inventory.TryUseItem(itemInSlot);
         }
@@ -56,6 +63,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     public void UpdateSlot(InventoryItem item = null)
     {
         itemInSlot = item;
+        if(defaultIcon != null)
+            defaultIcon.gameObject.SetActive(itemInSlot == null);
 
         if(itemInSlot == null)
         {
@@ -64,6 +73,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             return;
         }
 
+
+        // defaultIcon.gameObject.SetActive(false);
         Color color = Color.white;
         color.a =.9f;
         itemIcon.color = color;

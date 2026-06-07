@@ -3,8 +3,13 @@ using UnityEngine.Rendering;
 
 public class ObjectItemPickup : MonoBehaviour
 {
-    private SpriteRenderer sr;
     [SerializeField] private ItemDataSO itemData;
+    [SerializeField] private Vector2 dropForce = new Vector2(3,10);
+
+    private SpriteRenderer sr => GetComponent<SpriteRenderer>();
+    private Rigidbody2D rb => GetComponent<Rigidbody2D>();
+    private Collider2D col => GetComponent<Collider2D>();
+    
 
     // private InventoryBase inventory;
 
@@ -12,9 +17,36 @@ public class ObjectItemPickup : MonoBehaviour
     
     private void OnValidate()
     {
-        sr = GetComponent<SpriteRenderer>();
+
+        SetupVisuals();
+        
+    
+    }
+
+    public void SetupItem(ItemDataSO itemData)
+    {
+        this.itemData = itemData;
+        SetupVisuals();
+
+        float xForce = Random.Range(-dropForce.x, dropForce.x);
+        rb.linearVelocity = new Vector2(xForce,dropForce.y);
+        col.isTrigger = false;
+    }
+
+    private void SetupVisuals()
+    {
         sr.sprite = itemData.itemIcon;
         gameObject.name = $"ObjectItemPickup - {itemData.itemName}";
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") && col.isTrigger == false)
+        {
+            col.isTrigger = true;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

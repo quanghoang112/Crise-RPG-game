@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 5026872958488541869}
   - component: {fileID: 1079355939610868007}
   - component: {fileID: 8933653167999309689}
+  - component: {fileID: 6073742349241646233}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Untagged
@@ -236,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chest
   knockback: {x: 1.5, y: 3}
+  canDropItems: 1
 --- !u!114 &8933653167999309689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,3 +260,19 @@ MonoBehaviour:
   burnVFX: {r: 1, g: 0, b: 0, a: 1}
   electrifyVFX: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   originalHitVFXColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &6073742349241646233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659572354048581306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c67a99c4356144918c08447130138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityDropManager
+  itemDropPrefab: {fileID: 3215082283255899033, guid: aa47ad03407b02b40a28a3dff84bc0b3, type: 3}
+  dropData: {fileID: 11400000, guid: 1c42b6fbfdcea2743b0c4c7739b4a122, type: 2}
+  maxRarityAmount: 1200
+  maxItemsToDrop: 3

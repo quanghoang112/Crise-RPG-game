@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InventoryBase : MonoBehaviour
 {
+    protected Player player;
     public event Action OnInventoryChange;
     public int maxInventorySize = 10;
     public List<InventoryItem> itemList = new List<InventoryItem>();
@@ -12,7 +13,7 @@ public class InventoryBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
+        player = GetComponent<Player>();
     }
 
     public void TryUseItem(InventoryItem itemToUse)
@@ -24,6 +25,9 @@ public class InventoryBase : MonoBehaviour
             // Debug.Log("null");
             return;
         }
+
+        if(consumable.itemEffect.CanBeUsed(player) == false)  return;
+            
         
         consumable.itemEffect.ExecuteEffect();
 
@@ -87,8 +91,21 @@ public class InventoryBase : MonoBehaviour
         OnInventoryChange?.Invoke();
     }
 
-    public InventoryItem FindItem(ItemDataSO itemData)
+    public void RemoveFullStack(InventoryItem itemToRemove)
     {
-        return itemList.Find(item => item.itemData == itemData);
+        for (int i = 0;i< itemToRemove.stackSize; i++)
+        {
+            RemoveOneItem(itemToRemove);
+        }
+    }
+
+    public InventoryItem FindSameItem(InventoryItem itemToFind)
+    {
+        return itemList.Find(item => item.itemData == itemToFind.itemData);
+    }
+
+    public InventoryItem FindItem(InventoryItem itemToFind)
+    {
+        return itemList.Find(item => item == itemToFind);
     }
 }

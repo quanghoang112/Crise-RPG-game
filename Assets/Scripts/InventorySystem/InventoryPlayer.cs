@@ -1,23 +1,55 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryPlayer : InventoryBase
 {
-    private Player player;
+    public event Action<int> OnQuickSlotUsed;
+    public int gold = 100000;
+    
     public List<InventoryEquipmentSlots> equipList; //List chứa slot các trang bị (slot có thể có trang bị hoặc ko có trang bị) - logic
     public InventoryStorage storage {get;private set;}
+
+    [Header("Quick Item Slots")]
+    public InventoryItem[] quickItems = new InventoryItem[2];
+
     protected override void Awake()
     {
         base.Awake();
-        player = GetComponent<Player>();
         storage = FindAnyObjectByType<InventoryStorage>();
+    }
+
+    public void SetQuickItemInSlot(int slotNumber, InventoryItem itemToSet)
+    {
+        quickItems[slotNumber - 1] = itemToSet;
+        OnTriggerUpdateUI();
+    }
+
+    public void TryUseQuickItemInSlot(int passedSlotNumber)
+    {
+        int slotNumber = passedSlotNumber - 1;
+        var itemToUse = quickItems[slotNumber];
+
+        if(itemToUse == null)
+        {
+            return;
+        }
+
+        TryUseItem(itemToUse);
+
+        if(FindItem(itemToUse) == null) //Kiểm tra xem sau khi dùng thì còn món đồ đó không
+        {
+            quickItems[slotNumber] = FindSameItem(itemToUse); //không còn thì thử kiếm ở slot khác
+        }
+        OnTriggerUpdateUI();
+        OnQuickSlotUsed?.Invoke(slotNumber);
     }
 
     public void TryEquipItem (InventoryItem item)
     {
-        var inventoryItem = FindItem(item.itemData);
+        var inventoryItem = FindItem(item);
         var matchingSlots = equipList.FindAll(slot => slot.slotType == item.itemData.itemType);
-    
+        
         //Try to find empty slot and equip item
         foreach(var slot in matchingSlots)
         {
@@ -39,7 +71,6 @@ public class InventoryPlayer : InventoryBase
     private void EquipItem(InventoryItem itemToEquip, InventoryEquipmentSlots slot)
     {
         float saveHealthPercent = player.entityHealth.GetHealthPercent();
-
         
         slot.equipedItem = itemToEquip;
         slot.equipedItem.AddModifiers(player.entityStats);
@@ -59,6 +90,7 @@ public class InventoryPlayer : InventoryBase
         }
 
         float savedHealthPercent = player.entityHealth.GetHealthPercent();
+        // Debug.Log(savedHealthPercent);
 
         var slotToUnequip = equipList.Find(slot => slot.equipedItem == itemToUnequip);
 

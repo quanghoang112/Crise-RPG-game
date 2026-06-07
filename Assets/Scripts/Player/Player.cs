@@ -10,12 +10,12 @@ public class Player : Entity
     public static event Action onPlayerDeath;    
     public PlayerSkillManager skillManager {get;private set;}
     public PlayerVFX vfx;
-    public UI ui;
+    public UI ui{get;private set;}
     public EntityHealth entityHealth {get; private set;}
     public EntityStatusHandler statusHandler{get;private set;}
     public PlayerCombat playerCombat{get;private set;}
-
-
+    public InventoryPlayer inventory {get;private set;}
+    public PlayerStats entityStats{get;private set;}
 
 
 #region State Variable
@@ -70,14 +70,17 @@ public class Player : Entity
     {
         base.Awake();
 
-        input = new PlayerInputSet();
+        ui = FindAnyObjectByType<UI>();
         skillManager = GetComponent<PlayerSkillManager>();
         vfx = GetComponent<PlayerVFX>();
-        ui = FindAnyObjectByType<UI>();
         entityHealth = GetComponent<EntityHealth>();
         statusHandler = GetComponent<EntityStatusHandler>();
         playerCombat = GetComponent<PlayerCombat>();
-
+        inventory = GetComponent<InventoryPlayer>();
+        entityStats = GetComponent<PlayerStats>();
+        
+        input = new PlayerInputSet();
+        ui.SetupControlsUI(input);
 
         throwSwordState = new PlayerThrowSwordState(this, stateMachine,"Throw");
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -110,13 +113,16 @@ public class Player : Entity
         input.Player.Spell.performed += ctx => skillManager.shard.TryUseSkill();
         input.Player.Spell.performed += ctx => skillManager.timeEcho.TryUseSkill();
         
-        input.Player.ToolTip.performed += ctx => ui.ToggleCanvas();
-        input.Player.CanvasTab.performed += ctx => ui.changeTab(ctx.ReadValue<float>());
+        
+        
         // input.Player.Jump.performed += ctx => Debug.Log(ctx.ReadValueAsButton());
         // input.Player.Jump.canceled += ctx => Debug.Log(ctx.ReadValueAsButton());
         input.Player.Mouse.performed += ctx => mousePosition = ctx.ReadValue<Vector2>();
         input.Player.Interact.performed += ctx => TryInteract();
 
+        input.Player.QuickItemSlot1.performed += ctx => inventory.TryUseQuickItemInSlot(1);
+        // input.Player.QuickItemSlot1.performed += ctx =>Debug.Log("asdasd");
+        input.Player.QuickItemSlot2.performed += ctx => inventory.TryUseQuickItemInSlot(2);
     }
     private void OnDisable()
     {

@@ -26,7 +26,7 @@ MonoBehaviour:
   skillType: 1
   upgradeData:
     upgradeType: 15
-    cooldown: 0
+    cooldown: 2
     damageScale:
       physical: 1
       elemental: 1

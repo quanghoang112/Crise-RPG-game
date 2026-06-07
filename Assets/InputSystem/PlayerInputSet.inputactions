@@ -61,15 +61,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToolTip",
-                    "type": "Button",
-                    "id": "ff044b79-a61f-416b-be29-7985e4d72575",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RangeAttack",
                     "type": "Button",
                     "id": "5e9032a2-4398-426e-8be2-38e0d4f7c34d",
@@ -97,18 +88,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CanvasTab",
-                    "type": "Value",
-                    "id": "5137a420-3d16-48a7-bf74-2505592f10f9",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "f1aa63d7-fc3e-479f-a920-e6f81660869a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "QuickItemSlot1",
+                    "type": "Button",
+                    "id": "8f34accc-a25f-45b8-9876-1e589d6e393c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "QuickItemSlot2",
+                    "type": "Button",
+                    "id": "ef79b749-2d4d-4396-a1a4-2ea9552fb3df",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -239,17 +239,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cc533fd6-93bd-44cb-87ed-f21bd8622182",
-                    "path": "<Keyboard>/l",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "ToolTip",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "eae66fd9-5608-40f0-a84d-083c6b71faf3",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -282,8 +271,107 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "a92cd0b6-4e3b-433f-9435-f18ca3f13e32",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c34ac36-2378-4ee8-815a-e7c5541e818f",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "QuickItemSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "245de88a-8608-439a-b2e6-93ed9dbd647a",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "QuickItemSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "50801da1-15c0-4916-9694-c38393fc52e4",
+            "actions": [
+                {
+                    "name": "OptionUIToggle",
+                    "type": "Button",
+                    "id": "65249227-9654-44c4-a839-2b3bb657959d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CanvasToggle",
+                    "type": "Button",
+                    "id": "b7406945-0004-4135-9978-9d069ce39cac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CanvasTab",
+                    "type": "Value",
+                    "id": "c25c3018-e6ac-406b-93e1-a13e7270b39d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AlternativeInput",
+                    "type": "Button",
+                    "id": "faa5aa0c-3680-467d-a781-01b32087a09f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "76de5446-e249-4b31-8d3d-e800afe83e88",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "OptionUIToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4c3c133-76e4-432c-b11b-c30a608d74ea",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "CanvasToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis",
-                    "id": "da0b779a-06b8-4e88-9dba-454301e5513b",
+                    "id": "adc7b9ba-ec3b-48db-9622-c0d16763d382",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -294,7 +382,7 @@
                 },
                 {
                     "name": "negative",
-                    "id": "aeeff79e-6d95-4767-b73f-25c407ec3041",
+                    "id": "8a5fe5a6-9b37-4c78-86c7-b0b1bc7b6265",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
@@ -305,7 +393,7 @@
                 },
                 {
                     "name": "positive",
-                    "id": "17affa0a-3782-4603-9b85-28bdd3a22f61",
+                    "id": "33cf7e6c-dd7b-4830-a886-507c58925ddd",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
@@ -316,12 +404,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a92cd0b6-4e3b-433f-9435-f18ca3f13e32",
-                    "path": "<Keyboard>/f",
+                    "id": "3829e569-1eab-4865-942a-ba99434a465a",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Interact",
+                    "action": "AlternativeInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

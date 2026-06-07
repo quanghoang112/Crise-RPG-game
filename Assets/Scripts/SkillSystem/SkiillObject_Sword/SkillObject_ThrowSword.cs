@@ -5,7 +5,7 @@ public class SkillObject_ThrowSword : SkillObject_Base
     
     protected SkillThrowSword swordManager;
     
-    protected float maxAllowedDistance = 25f; 
+    protected float maxAllowedDistance = 25f;
     protected Transform playerTransform;
     private bool canComeback;
     private float comebackSpeed = 20;
@@ -48,7 +48,10 @@ public class SkillObject_ThrowSword : SkillObject_Base
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
         if(distance > maxAllowedDistance)
+        {
+            // Debug.Log(maxAllowedDistance);
             GetSwordBackToPlayer();
+        }
 
         if(canComeback == false)
             return;

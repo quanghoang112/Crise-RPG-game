@@ -14,14 +14,18 @@ public class InventoryItem
     public ItemModifier[] modifiers {get; private set;}
     public ItemEffectDataSO itemEffect;
 
+    public int buyPrice{get;private set;}
+    public float sellPrice {get; private set;}
+
     public InventoryItem(ItemDataSO itemData)
     {
         this.itemData = itemData;
 
+        itemId = itemData.itemName +Guid.NewGuid();
         modifiers = EquipmentData()?.modifiers;
         itemEffect = itemData.itemEffect;
-
-        itemId = itemData.itemName +Guid.NewGuid();
+        buyPrice = itemData.itemPrice;
+        sellPrice = itemData.itemPrice * .65f;
     }
 
     public void AddModifiers(EntityStats playerStats)
@@ -55,16 +59,29 @@ public class InventoryItem
 
     public string GetItemInfo()
     {
+        StringBuilder sb = new StringBuilder();
+        
         if(itemData.itemType == ItemType.Material)
-            return "Used for crafting.";
+        {
+            sb.AppendLine("");
+            sb.AppendLine("Used for crafting.");
+            
+            sb.AppendLine("");
+            sb.AppendLine("");
+            return sb.ToString();
+        }
 
         if(itemData.itemType == ItemType.Consumable)
-            return itemData.itemEffect.effectDescription;
-
+        {
+            sb.AppendLine("");
+            sb.AppendLine(itemData.itemEffect.effectDescription);
+            sb.AppendLine("");
+            sb.AppendLine("");
+            return sb.ToString();
+        }
         
 
 //item.itemData.itemType == ItemType.weapon,armor,trinket
-        StringBuilder sb = new StringBuilder();
 
         sb.AppendLine("");
 
@@ -83,6 +100,9 @@ public class InventoryItem
             sb.AppendLine("");
             sb.AppendLine("Unique effect:");
             sb.AppendLine(itemEffect.effectDescription);
+            sb.AppendLine("");
+            sb.AppendLine("");
+            
         }
 
         return sb.ToString();

@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9e919dd8dccee47b427a7ab00324bf, type: 3}
   m_Name: Equipment data - Winter's Touch
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentDataSO
+  itemPrice: 100
+  minStackSizeAtShop: 1
+  maxStackSizeAtShop: 1
+  itemRarity: 0
+  dropChance: 100
+  maxDropChance: 100
   itemName: Winter's touch
   itemIcon: {fileID: -451399156, guid: 7ae0115109b4a6f42a4f7ad59397d09b, type: 3}
   itemType: 2
   maxStackSize: 1
   itemEffect: {fileID: 11400000, guid: a774f35ff27cbbc4db3bad96371d50af, type: 2}
+  craftRecipe: []
   modifiers:
   - statsType: 3
     value: 2

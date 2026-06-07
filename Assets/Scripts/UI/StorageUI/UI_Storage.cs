@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_Storage : MonoBehaviour
@@ -8,6 +9,25 @@ public class UI_Storage : MonoBehaviour
     [SerializeField] private UI_ItemSlotParent inventoryParent;
     [SerializeField] private UI_ItemSlotParent storageParent;
     [SerializeField] private UI_ItemSlotParent materialStashParent;
+
+
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if(storage == null)
+            return;
+
+        
+        inventoryParent.UpdateSlots(playerInventory.itemList);
+        storageParent.UpdateSlots(storage.itemList);
+        materialStashParent.UpdateSlots(storage.materialStash);
+    }
+
+
     public void SetupStorage(InventoryStorage storage)
     {
         this.storage = storage;
@@ -21,10 +41,4 @@ public class UI_Storage : MonoBehaviour
             slot.SetStorageForUiStorageSlot(storage);
     }
 
-    private void UpdateUI()
-    {
-        inventoryParent.UpdateSlots(playerInventory.itemList);
-        storageParent.UpdateSlots(storage.itemList);
-        materialStashParent.UpdateSlots(storage.materialStash);
-    }
 }

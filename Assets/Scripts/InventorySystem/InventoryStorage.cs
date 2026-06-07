@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryStorage : InventoryBase
@@ -8,8 +9,20 @@ public class InventoryStorage : InventoryBase
     public List<InventoryItem> materialStash;// material item lưu trữ trong storage
 
 
+
+    public void CraftItem(InventoryItem itemToCraft)
+    {
+        ConsumeMaterials(itemToCraft);
+        playerInventory.AddItem(itemToCraft);
+    }
+
+    public bool CanCraftItem(InventoryItem itemToCraft)
+    {
+        return HasEnoughMaterials(itemToCraft) && playerInventory.CanAddItem(itemToCraft);
+    }
+
 // trừ trong túi player trc rồi mới trừ trong storage
-    public void ConsumeMaterials(InventoryItem itemToCraft) 
+    private void ConsumeMaterials(InventoryItem itemToCraft) 
     {
         foreach(var requiredItem in itemToCraft.itemData.craftRecipe)
         {
@@ -92,6 +105,7 @@ public class InventoryStorage : InventoryBase
             materialStash.Add(itemToAdd);
 
         OnTriggerUpdateUI();
+        materialStash = materialStash.OrderBy(item => item.itemData.name).ToList();
     }
 
     public InventoryItem StackableInStash(InventoryItem itemToAdd)

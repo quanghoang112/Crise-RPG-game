@@ -9,6 +9,7 @@ public class Enemy : Entity
     public EnemyBattleState battleState;
     public EnemyDeathState deathState;
     public EnemyStunnedState stunnedState;
+    public EntityStats entityStats {get;private set;}
     [Range(0f,2f)]
     public float moveAnimSpeedMultiplier = 1f;
 
@@ -43,6 +44,8 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
+        entityStats = GetComponent<EntityStats>();
+    
     }
     protected override void Start()
     {

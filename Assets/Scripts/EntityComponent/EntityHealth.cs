@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class EntityHealth : MonoBehaviour, IDamagable
 {
     public event Action OnTakingDamage;
-
+    public event Action OnhealthUpdate;
 
     private Slider healthBar;
     private EntityVFX entityVFX => GetComponent<EntityVFX>();
     private Entity entity => GetComponent<Entity>();
     private EntityStats entityStats => GetComponent<EntityStats>();
+    private EntityDropManager dropManager => GetComponent<EntityDropManager>();
 
 
-
+    private bool miniHealthBarActive;
     [SerializeField] protected float maxHp;
     [SerializeField] protected bool isDead;
     [SerializeField] public float currentHp;
@@ -41,6 +42,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
             maxHp = entityStats.GetMaxHealth();
             currentHp = maxHp;
             healthBar = GetComponentInChildren<Slider>();
+            OnhealthUpdate += updateHealthBar;
+            
             updateHealthBar();
             InvokeRepeating(nameof(RegenHealth),0, regenInterval);
         }
@@ -113,7 +116,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
         else
             currentHp = newHealth;
         
-        updateHealthBar();
+        // updateHealthBar();
+        OnhealthUpdate?.Invoke();
     }
 
     private void RegenHealth()
@@ -130,7 +134,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
         currentHp -= damage;
         
         entityVFX?.PlayOnDamageVFX();
-        updateHealthBar();
+        // updateHealthBar();
+        OnhealthUpdate?.Invoke();
         
         if(currentHp <= 0)
         {
@@ -144,22 +149,27 @@ public class EntityHealth : MonoBehaviour, IDamagable
         isDead = true;
         entity?.EntityDeath();
         // Debug.Log("Entity died");
+        dropManager?.DropItems();
     }
 
     public float GetHealthPercent() => currentHp / maxHp;
+    public float GetCurrentHealth() => currentHp;
 
     public void SetHealthToPercent(float percent)
     {
         currentHp = entityStats.GetMaxHealth() * Mathf.Clamp01(percent);
-        updateHealthBar();
+        // updateHealthBar();
+        OnhealthUpdate?.Invoke();
     }
     private void updateHealthBar()
     {
-        if(healthBar != null)
-        {
-            healthBar.value = currentHp / maxHp;
-        }
+        if(healthBar == null && healthBar.transform.parent.gameObject.activeSelf == false)
+            return;
+
+        healthBar.value = currentHp / maxHp; 
     }
+
+    public void EnableHealthBar(bool enable) => healthBar?.transform.parent.gameObject.SetActive(enable);
     private int calculateKnockbackDirection(Transform damageDealer)
     {
         int knockbackDir = transform.position.x - damageDealer.position.x > 0 ? 1 : -1;

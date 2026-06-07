@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UI_EquipSlotParent : MonoBehaviour
+{
+    private UI_EquipSlot[] equipSlots;
+
+    public void UpdateEquipmentSlots(List<InventoryEquipmentSlots> equipList)
+    {
+        if(equipSlots == null)
+            equipSlots = GetComponentsInChildren<UI_EquipSlot>();
+        
+        for(int i = 0;i<equipSlots.Length;i++)
+        {
+            var playerEquipSlot = equipList[i];
+
+            if(playerEquipSlot.HasItem() == false)
+            {
+                equipSlots[i].UpdateSlot();
+            }
+            else
+                equipSlots[i].UpdateSlot(playerEquipSlot.equipedItem);
+        }
+    }
+}
