@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class PlayerHealth : EntityHealth
+{
+
+    protected void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            Die();
+        }
+    }
+    protected override void Die()
+    {
+        base.Die();
+
+        // GameManager.instance.SetLastDeathPosition(transform.position);
+        GameManager.instance.RestartScene();
+    }
+}

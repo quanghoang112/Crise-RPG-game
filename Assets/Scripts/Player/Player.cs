@@ -6,8 +6,10 @@ using System;
 
 public class Player : Entity 
 {
+    public static Player instance;
     public PlayerInputSet input{get; private set;}
     public static event Action onPlayerDeath;    
+    
     public PlayerSkillManager skillManager {get;private set;}
     public PlayerVFX vfx;
     public UI ui{get;private set;}
@@ -69,6 +71,9 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        instance = this;
+        // DontDestroyOnLoad(gameObject);
+        
 
         ui = FindAnyObjectByType<UI>();
         skillManager = GetComponent<PlayerSkillManager>();
@@ -198,7 +203,7 @@ public class Player : Entity
     {
         base.EntityDeath();
 
-        onPlayerDeath.Invoke();
+        onPlayerDeath?.Invoke();
         stateMachine.ChangeState(deathState);
     }
     public void enterAttackStateWithoutDelay()

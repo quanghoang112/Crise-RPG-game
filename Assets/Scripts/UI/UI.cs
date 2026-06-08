@@ -30,8 +30,8 @@ public class UI : MonoBehaviour
         statsToolTip = GetComponentInChildren<UI_StatsToolTip>();
         skillTree = GetComponentInChildren<UI_SkillTree>(true);
         craftUI = GetComponentInChildren<UI_Craft>(true);
-        merchantUI = GetComponentInChildren<UI_Merchant>(true);
         inGameUI = GetComponentInChildren<UI_InGame>(true);
+        merchantUI = GetComponentInChildren<UI_Merchant>(true);
         optionsUI = GetComponentInChildren<UI_Options>(true);
         storageUI = GetComponentInChildren<UI_Storage>(true);
     }
@@ -137,8 +137,8 @@ public class UI : MonoBehaviour
             if(currActive == false) HideAllTooltips();
             else    SetTooltipsAboveOtherElements();
             
-            // StopPlayerControls(currActive);
-            StopPlayerControlsIfNeeded();
+            StopPlayerControls(currActive);
+            // StopPlayerControlsIfNeeded();
             // Mẹo nhỏ cho Game Designer: Xử lý đóng/mở chuột khi ẩn hiện UI
             // if (!isActive) // Nếu chuẩn bị MỞ Canvas
             // {
@@ -159,6 +159,7 @@ public class UI : MonoBehaviour
         int n = uiTabs.Length;
 
         setAllUnactiveTabs();
+        HideAllTooltips();
 
         // Debug.Log(currentTabIndex);
 

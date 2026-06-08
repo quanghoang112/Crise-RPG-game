@@ -1,16 +1,44 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData : MonoBehaviour
+[Serializable]
+public class GameData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int gold;
+    public List<InventoryItem> itemList;
+    public SerializableDictionary<string ,int> inventory;
+    public SerializableDictionary<string, int> storageItems;
+    public SerializableDictionary<string, int> storageMaterials;
 
-    // Update is called once per frame
-    void Update()
+    public SerializableDictionary<string, ItemType> equipedItems; //  itemSaveId -> slot for item
+
+    public int skillPoints;
+    public SerializableDictionary<string, bool> skillTreeUI;//skill name => unlock status
+    public SerializableDictionary<SkillType, SkillUpgradeType> skillUpgrades;
+    
+    public SerializableDictionary<string, bool> unlockedCheckpoints; // checkpoint id => unlocked status
+
+    public SerializableDictionary<string, Vector3> inScenePortals; //scene name => portal position
+    public string portalDestinationSceneName;
+    public bool returningFromTown;
+    
+    public string lastScenePlayed;
+
+    public Vector3 lastPlayerPosition;
+    public GameData()
     {
-        
+        inventory = new SerializableDictionary<string, int>();
+        storageItems = new SerializableDictionary<string, int>();
+        storageMaterials = new SerializableDictionary<string, int>();
+
+        equipedItems = new SerializableDictionary<string,ItemType>();
+
+        skillTreeUI = new SerializableDictionary<string, bool>();
+        skillUpgrades = new SerializableDictionary<SkillType, SkillUpgradeType>();
+
+        unlockedCheckpoints = new SerializableDictionary<string, bool>();
+    
+        inScenePortals = new SerializableDictionary<string, Vector3>();
     }
 }

@@ -36,6 +36,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if(alternativeInput)
         {
             inventory.RemoveOneItem(itemInSlot);
+            return;
         }
 
         if(itemInSlot.itemData.itemType == ItemType.Consumable)

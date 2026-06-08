@@ -79,6 +79,9 @@ public class SkillBase : MonoBehaviour
 
     protected bool OnCooldown() => Time.time < lastTimeUsed + cooldown;
     
+    public SkillUpgradeType GetUpgradeType() => upgradeType;
+    public SkillType GetSkillType() => skillType;
+
     public void SetSkillOnCooldown()
     {
         player.ui.inGameUI.GetSkillSlot(skillType).StartCooldown(cooldown);

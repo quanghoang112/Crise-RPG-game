@@ -74,6 +74,9 @@ public class UI_InGame : MonoBehaviour
 
     public UI_SkillSlot GetSkillSlot(SkillType skillType)
     {
+        if(skillSlots == null)
+            skillSlots = GetComponentsInChildren<UI_SkillSlot>(true);
+
         foreach (var slot in skillSlots)
         {
             if(slot.skillType == skillType)

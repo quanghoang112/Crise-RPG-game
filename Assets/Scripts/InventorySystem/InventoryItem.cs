@@ -47,7 +47,12 @@ public class InventoryItem
     }
 
     public void AddItemEffect(Player player) => itemEffect?.Subscribe(player);
-    public void RemoveItemEffect() => itemEffect.Unsubscribe();
+    public void RemoveItemEffect()
+    {
+        // if(itemEffect == null)
+        //     return;
+        itemEffect?.Unsubscribe();
+    }
 
     private EquipmentDataSO EquipmentData()
     {

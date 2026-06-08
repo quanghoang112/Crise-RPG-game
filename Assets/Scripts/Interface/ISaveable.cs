@@ -1,16 +1,7 @@
 using UnityEngine;
 
-public class ISaveable : MonoBehaviour
+public interface ISaveable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void LoadData(GameData data);
+    public void SaveData(ref GameData data);
 }
