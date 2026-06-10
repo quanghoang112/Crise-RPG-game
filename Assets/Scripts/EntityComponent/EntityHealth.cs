@@ -152,7 +152,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         dropManager?.DropItems();
     }
 
-    public float GetHealthPercent() => currentHp / maxHp;
+    public float GetHealthPercent() => currentHp / entityStats.GetMaxHealth();
     public float GetCurrentHealth() => currentHp;
 
     public void SetHealthToPercent(float percent)
@@ -166,7 +166,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         if(healthBar == null && healthBar.transform.parent.gameObject.activeSelf == false)
             return;
 
-        healthBar.value = currentHp / maxHp; 
+        healthBar.value = currentHp / entityStats.GetMaxHealth(); 
     }
 
     public void EnableHealthBar(bool enable) => healthBar?.transform.parent.gameObject.SetActive(enable);
