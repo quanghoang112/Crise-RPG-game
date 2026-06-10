@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class EnemyHealth : EntityHealth
 {
+    // private Player player;
     private Enemy enemy => GetComponent<Enemy>();
     public override bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
     {
+        // player = damageDealer.GetComponent<Player>();
         if(!canTakeDamage)
             return false;
         
@@ -21,6 +23,8 @@ public class EnemyHealth : EntityHealth
     protected override void Die()
     {
         base.Die();
+        Player.instance.inventory.gold += Random.Range(1000,10000);
+        enemy.dropManager?.DropItems();
         // enemy.EntityDeath();
     }
 }

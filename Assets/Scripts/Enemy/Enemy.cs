@@ -10,6 +10,7 @@ public class Enemy : Entity
     public EnemyDeathState deathState;
     public EnemyStunnedState stunnedState;
     public EntityStats entityStats {get;private set;}
+    public EntityDropManager dropManager{get;private set;}
     [Range(0f,2f)]
     public float moveAnimSpeedMultiplier = 1f;
 
@@ -45,6 +46,7 @@ public class Enemy : Entity
     {
         base.Awake();
         entityStats = GetComponent<EntityStats>();
+        dropManager = GetComponent<EntityDropManager>();
     
     }
     protected override void Start()
