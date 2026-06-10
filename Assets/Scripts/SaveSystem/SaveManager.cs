@@ -32,7 +32,7 @@ public class SaveManager : MonoBehaviour
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         allSaveables = FindISaveable();
         //có option 2 là thay vì tìm all ISaveable thì ta cho các class đăng ký
-        yield return new WaitForSeconds(.1f);
+        yield return null;
 
         LoadGame();
     }

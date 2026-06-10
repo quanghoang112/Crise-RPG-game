@@ -15,6 +15,7 @@ public class PlayerHealth : EntityHealth
         base.Die();
 
         // GameManager.instance.SetLastDeathPosition(transform.position);
-        GameManager.instance.RestartScene();
+        // GameManager.instance.RestartScene();
+        Player.instance.ui.OpenDeathSreenUI();
     }
 }

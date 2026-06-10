@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
 {
     public Rigidbody2D rb{get; private set;}
     public Animator anim{get; private set;}
+    public EntitySFX sfx {get;private set;}
     
     protected StateMachine stateMachine;
     private bool isFacingRight = true;
@@ -40,7 +41,7 @@ public class Entity : MonoBehaviour
         stateMachine = new StateMachine();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
-        
+        sfx = GetComponent<EntitySFX>();
     }
     protected virtual void Start()
     {

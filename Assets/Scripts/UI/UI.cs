@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class UI : MonoBehaviour
 {
+    // public static UI instance;
+
     [SerializeField] private GameObject[] uiElements;
     public bool alternativeInput {get; private set;}
     private PlayerInputSet input;
@@ -17,6 +19,8 @@ public class UI : MonoBehaviour
     public UI_Merchant merchantUI{get;private set;}
     public UI_InGame inGameUI {get; private set;}
     public UI_Options optionsUI {get; private set;}
+    public UI_DeathScreen deathScreenUI{get;private set;}
+    public UI_FadeScreen fadeScreenUI {get; private set;}
     #endregion
 
     [SerializeField] private GameObject[] uiTabs;       // Mảng chứa các Tab con
@@ -34,6 +38,8 @@ public class UI : MonoBehaviour
         merchantUI = GetComponentInChildren<UI_Merchant>(true);
         optionsUI = GetComponentInChildren<UI_Options>(true);
         storageUI = GetComponentInChildren<UI_Storage>(true);
+        deathScreenUI = GetComponentInChildren<UI_DeathScreen>(true);
+        fadeScreenUI = GetComponentInChildren<UI_FadeScreen>(true);
     }
 
     private void Start()
@@ -42,6 +48,21 @@ public class UI : MonoBehaviour
         setAllUnactiveTabs();
 
         skillTree.UnlockDefaultSkills();
+    }
+
+    public void OpenDeathSreenUI()
+    {
+        SwitchTo(deathScreenUI.gameObject);
+        StopPlayerControls(true);
+        input.Disable();
+    }
+
+    private void SwitchTo(GameObject objectToSwitchOn)
+    {
+        foreach(var element in uiElements)
+            element.gameObject.SetActive(false);
+
+        objectToSwitchOn.SetActive(true);
     }
 
     public void SetupControlsUI (PlayerInputSet inputSet)
@@ -134,7 +155,11 @@ public class UI : MonoBehaviour
 
             currActive = !isActive;
 
-            if(currActive == false) HideAllTooltips();
+            if(currActive == false) 
+            {
+                HideAllTooltips();
+                fadeScreenUI.transform.SetAsLastSibling();
+            }
             else    SetTooltipsAboveOtherElements();
             
             StopPlayerControls(currActive);
@@ -160,6 +185,7 @@ public class UI : MonoBehaviour
 
         setAllUnactiveTabs();
         HideAllTooltips();
+        fadeScreenUI.transform.SetAsLastSibling();
 
         // Debug.Log(currentTabIndex);
 

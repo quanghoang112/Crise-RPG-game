@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectCheckpoint : MonoBehaviour, ISaveable
 {
@@ -8,18 +9,28 @@ public class ObjectCheckpoint : MonoBehaviour, ISaveable
     // private ObjectCheckpoint[] allCheckpoints;
     [SerializeField] private string checkpointId;
     [SerializeField] private Transform respawnPoint;
+
+    private AudioSource fireAudioSource;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        fireAudioSource = GetComponent<AudioSource>();
         // allCheckpoints = FindObjectsByType<ObjectCheckpoint>(FindObjectsSortMode.None);
     }
 
     private void OnValidate()
     {
 #if UNITY_EDITOR
+        // if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(gameObject))
+        // {
+        //     // Nếu là file gốc trong thư mục Project, hãy xóa trắng ID đi để khi kéo vào Level nó tự sinh mã mới
+        //     checkpointId = "";
+        //     return;
+        // }
         if(string.IsNullOrEmpty(checkpointId))
         {
-            checkpointId = Guid.NewGuid().ToString();
+            checkpointId =SceneManager.GetActiveScene().name + "_" + Guid.NewGuid().ToString();
         }
 #endif
     }
@@ -32,6 +43,11 @@ public class ObjectCheckpoint : MonoBehaviour, ISaveable
     {
         isActive =activate;
         anim.SetBool("Enable",activate);
+
+        if(isActive && fireAudioSource.isPlaying == false)
+            fireAudioSource.Play();
+        if(!isActive)
+            fireAudioSource.Stop();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

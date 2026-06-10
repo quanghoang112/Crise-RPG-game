@@ -8,9 +8,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, ISaveable
 {
     public static GameManager instance;
+
+    public UI ui;
     private Vector3 lastPlayerPosition;
 
     private string lastScenePlayed = "Level_0";
+    private bool dataLoaded;
 
     private void Awake()
     {
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour, ISaveable
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        ui = FindAnyObjectByType<UI>();
     }
 
     // public void SetLastDeathPosition(Vector3 position) => lastPlayerPosition = position;
@@ -41,25 +46,51 @@ public class GameManager : MonoBehaviour, ISaveable
 
     public void ChangeScene(string sceneName, RespawnType respawnType)
     {
-        SaveManager.instance.SaveGame();
+        //trước đó dataLoaded = true
+        SaveManager.instance.SaveGame();// vào đây sẽ đổi về false, nhưng mọi thứ được thực hiện trong 1 frame
+        //nên giá trị dataLoaded nhận được ở StartCoroutine lại là true
+        Time.timeScale = 1;
         StartCoroutine(ChangeSceneCo(sceneName,respawnType));
     }
 
     private IEnumerator ChangeSceneCo(string sceneName, RespawnType respawnType)
     {
         //Fade effect
+        UI_FadeScreen fadeScreen = FindFadeScreenUI();
+        fadeScreen.DoFadeOut();
 
-        yield return new WaitForSeconds(1f);
+        yield return fadeScreen.fadeEffectCo;
+
         Debug.Log(sceneName);
-
         SceneManager.LoadScene(sceneName);
 
-        yield return new WaitForSeconds(.2f);
+        //nếu không set dòng này, hoặc đợi 1 frame thì khả năng cao là data k có thời gian để load
+        // không chạy được dòng while
+        dataLoaded = false; // becomes true when SceneLoadScene -> load data game from save manager
+        yield return null; // sẽ luôn để delay ít nhất 1 frame để loadScene
+
+        while(dataLoaded == false)
+        {
+            yield return null;
+        }
+
+        fadeScreen = FindFadeScreenUI();
+        fadeScreen.DoFadeIn();
+        
+        Player player = Player.instance;
+
+        if(player == null)
+            yield break;
 
         Vector3 position = GetNewPlayerPosition(respawnType);
 
         if(position != Vector3.zero)
             Player.instance.TeleportPLayer(position);
+    }
+
+    private UI_FadeScreen FindFadeScreenUI()
+    {
+        return FindAnyObjectByType<UI_FadeScreen>();
     }
 
     private Vector3 GetNewPlayerPosition(RespawnType type)
@@ -123,6 +154,7 @@ public class GameManager : MonoBehaviour, ISaveable
 
         // if(string.IsNullOrEmpty(lastScenePlayed))
         //     lastScenePlayed = "Level_0";
+        dataLoaded = true;
     }
 
     public void SaveData(ref GameData data)
@@ -136,5 +168,6 @@ public class GameManager : MonoBehaviour, ISaveable
 
         data.lastPlayerPosition = Player.instance.transform.position;
         data.lastScenePlayed = currentScene;
+        dataLoaded = false;
     }
 }
