@@ -76,9 +76,9 @@ public class SaveManager : MonoBehaviour
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         dataHandler.Delete();
 
-        gameData.skillPoints = -1;
-        gameData.gold = -1;
         LoadGame();
+        // gameData.skillPoints = -1;
+        // gameData.gold = -1;
     }
 
     private List<ISaveable> FindISaveable() //option 1: tìm mọi gameObject active và inactive có các component này

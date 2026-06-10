@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129e0ddc8f43d8a458177dd7bd30f3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  checkpointId: 476c9e97-a665-4533-bf20-c3de9d608c2f
+  checkpointId: MainMenu_3381abb4-e0be-4c12-afc1-48657cce62df
   respawnPoint: {fileID: 0}
 --- !u!114 &7740389411266806303
 MonoBehaviour:

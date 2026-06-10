@@ -16,6 +16,7 @@ public class ObjectCheckpoint : MonoBehaviour, ISaveable
     {
         anim = GetComponentInChildren<Animator>();
         fireAudioSource = GetComponent<AudioSource>();
+        // checkpointId = "";
         // allCheckpoints = FindObjectsByType<ObjectCheckpoint>(FindObjectsSortMode.None);
     }
 
@@ -28,9 +29,11 @@ public class ObjectCheckpoint : MonoBehaviour, ISaveable
         //     checkpointId = "";
         //     return;
         // }
-        if(string.IsNullOrEmpty(checkpointId))
+        if(string.IsNullOrEmpty(checkpointId)|| checkpointId != SceneManager.GetActiveScene().name)
         {
-            checkpointId =SceneManager.GetActiveScene().name + "_" + Guid.NewGuid().ToString();
+            // checkpointId =SceneManager.GetActiveScene().name + "_" + Guid.NewGuid().ToString();
+            
+            checkpointId =SceneManager.GetActiveScene().name;
         }
 #endif
     }
