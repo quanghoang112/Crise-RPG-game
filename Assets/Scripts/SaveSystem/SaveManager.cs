@@ -59,6 +59,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("Saving game...");
         foreach(var saveable in allSaveables)
         {
             saveable.SaveData(ref gameData); // lưu data dưới class gameData
@@ -75,6 +76,8 @@ public class SaveManager : MonoBehaviour
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         dataHandler.Delete();
 
+        gameData.skillPoints = -1;
+        gameData.gold = -1;
         LoadGame();
     }
 

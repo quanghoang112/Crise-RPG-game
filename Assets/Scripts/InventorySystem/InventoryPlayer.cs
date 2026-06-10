@@ -14,6 +14,7 @@ public class InventoryPlayer : InventoryBase
 
     [Header("Gold info")]
     public int gold = 100000;
+    // public bool isSave = false;
 
 
     protected override void Awake()
@@ -111,6 +112,7 @@ public class InventoryPlayer : InventoryBase
     {
         base.SaveData(ref data);
 
+        // Debug.Log("Saving gold: " + gold);
         data.gold = gold;
         data.inventory.Clear();
         data.equipedItems.Clear();
@@ -144,7 +146,13 @@ public class InventoryPlayer : InventoryBase
     {
         base.LoadData(data);
 
-        gold = data.gold;
+        // Debug.Log(data.gold);
+        // Debug.Log(gold);
+        // Debug.Log(data == null);
+
+        // gold = data.gold;
+
+        gold = data.gold == -1 ? gold : data.gold;
 
         foreach (var entry in data.inventory)
         {

@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1323946476120916589
 Transform:
   m_ObjectHideFlags: 0
@@ -274,5 +274,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityDropManager
   itemDropPrefab: {fileID: 3215082283255899033, guid: aa47ad03407b02b40a28a3dff84bc0b3, type: 3}
   dropData: {fileID: 11400000, guid: 1c42b6fbfdcea2743b0c4c7739b4a122, type: 2}
-  maxRarityAmount: 1200
-  maxItemsToDrop: 3
+  maxRarityAmount: 2000
+  maxItemsToDrop: 5

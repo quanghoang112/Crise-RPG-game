@@ -152,8 +152,8 @@ public class GameManager : MonoBehaviour, ISaveable
 
         Debug.Log(string.IsNullOrEmpty(lastScenePlayed));
 
-        // if(string.IsNullOrEmpty(lastScenePlayed))
-        //     lastScenePlayed = "Level_0";
+        if(string.IsNullOrEmpty(lastScenePlayed))
+            lastScenePlayed = "Level_0";
         dataLoaded = true;
     }
 

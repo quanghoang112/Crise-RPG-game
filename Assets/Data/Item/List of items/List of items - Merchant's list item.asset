@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: List of items - Merchant's list item
   m_EditorClassIdentifier: Assembly-CSharp::ItemListDataSO
   itemList:
-  - {fileID: 11400000, guid: 01872135a92870242a37fc88bd637827, type: 2}
-  - {fileID: 11400000, guid: 97feccf3f010f4241b4261bb40639b67, type: 2}
-  - {fileID: 11400000, guid: 2e4f2c4b32084d34b948cd83c8200b8f, type: 2}
-  - {fileID: 11400000, guid: 3ae84244e6b146648b8e3a3570410c83, type: 2}
-  - {fileID: 11400000, guid: b93dd8936ed93d849a2b9194accedea7, type: 2}
-  - {fileID: 11400000, guid: 9859c4c34259bd2498bc6c67272e7691, type: 2}
-  - {fileID: 11400000, guid: 4800fb7a8e238b84085bc9aa8b144919, type: 2}
+  - {fileID: 11400000, guid: 7db12515911d3214fbce0a1cd337142a, type: 2}
+  - {fileID: 11400000, guid: c36bb8df7bacde145a3af5c9982f049b, type: 2}
+  - {fileID: 11400000, guid: 666e6dfe1de848345bd9770173f7fa23, type: 2}

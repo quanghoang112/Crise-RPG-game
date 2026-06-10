@@ -73,6 +73,7 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void SaveData(ref GameData data)
     {
+        Debug.Log("Saving skill tree data...");
         data.skillPoints = skillPoints;
         data.skillTreeUI.Clear();
         data.skillUpgrades.Clear();
@@ -91,7 +92,7 @@ public class UI_SkillTree : MonoBehaviour, ISaveable
 
     public void LoadData(GameData data)
     {
-        skillPoints = data.skillPoints;
+        skillPoints = data.skillPoints == -1 ? skillPoints: data.skillPoints;
 
         foreach(var node in allTreeNodes)
         {

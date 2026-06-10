@@ -1245,7 +1245,7 @@ GameObject:
   - component: {fileID: 1201558392}
   - component: {fileID: 1201558391}
   m_Layer: 0
-  m_Name: ___ AUDIO MANAGER ___
+  m_Name: '*** AUDIO MANAGER ***'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4638,7 +4638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7749658178053466323
 RectTransform:
   m_ObjectHideFlags: 0
