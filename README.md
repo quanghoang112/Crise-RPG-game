@@ -19,7 +19,7 @@ This project represents my growth as a developer and my commitment to building s
 
  **Note**: 
  - I find some bugs about my save management, but I will fix it soon.
- - you can find a full game demo at \href{https://drive.google.com/file/d/1Ar5Fjk-CnrJnKsAudvhfqtIa3lXnTXOA/view?usp=sharing}{this}.
+ - you can find a full game demo at [this](https://drive.google.com/file/d/1Ar5Fjk-CnrJnKsAudvhfqtIa3lXnTXOA/view?usp=sharing).
 
 ## Main Menu:
 https://github.com/user-attachments/assets/be17094c-ae27-446e-a291-814c2547b424
