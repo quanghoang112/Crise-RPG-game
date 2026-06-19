@@ -1,9 +1,15 @@
 using UnityEngine;
 
-public class ObjectNPC : MonoBehaviour
+public class ObjectNPC : MonoBehaviour,IInteractable
 {
+    [Header("Quest info")]
+    [SerializeField] private string npcQuestTargetId;
+    [SerializeField] private RewardType rewardNpc;
+    [Space]
     protected Transform player;
     protected UI ui;
+    protected PlayerQuestManager questManager;
+    protected EntityDropManager dropManager;
 
     [SerializeField] private Transform npc;
     [SerializeField] private GameObject interactToolTip;
@@ -16,9 +22,16 @@ public class ObjectNPC : MonoBehaviour
 
     protected virtual void Awake()
     {
+        dropManager = GetComponent<EntityDropManager>();
         ui = FindAnyObjectByType<UI>();
         startPosition = interactToolTip.transform.position;
         interactToolTip.SetActive(false);
+    }
+
+    protected virtual void Start()
+    {
+        questManager = Player.instance.questManager;
+        
     }
 
     protected virtual void Update()
@@ -61,5 +74,11 @@ public class ObjectNPC : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         interactToolTip.SetActive(false);
+    }
+
+    public virtual void Interact()
+    {
+        questManager.AddProgress(npcQuestTargetId,dropManager: dropManager);
+        questManager.TryGiveRewardFrom(rewardNpc, dropManager: dropManager);
     }
 }

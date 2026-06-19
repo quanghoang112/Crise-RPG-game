@@ -10,6 +10,7 @@ public class Player : Entity
     public PlayerInputSet input{get; private set;}
     public static event Action onPlayerDeath;    
     
+    public PlayerQuestManager questManager{get; private set;}
     public PlayerSkillManager skillManager {get;private set;}
     public PlayerVFX vfx;
     public UI ui{get;private set;}
@@ -83,7 +84,8 @@ public class Player : Entity
         playerCombat = GetComponent<PlayerCombat>();
         inventory = GetComponent<InventoryPlayer>();
         entityStats = GetComponent<PlayerStats>();
-        
+        questManager = GetComponent<PlayerQuestManager>();
+
         input = new PlayerInputSet();
         ui.SetupControlsUI(input);
 

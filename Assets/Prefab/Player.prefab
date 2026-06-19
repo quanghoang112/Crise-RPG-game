@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 6500463887942876409}
   - component: {fileID: 2938512700433241011}
   - component: {fileID: 7204297840114507080}
+  - component: {fileID: 6260542138659211755}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -992,6 +993,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntitySFX
   attackHit: player_attackHit
   attackMiss: player_attackMiss
+--- !u!114 &6260542138659211755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917466350822855845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31589c17b23b9f74486ef5ad01337a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerQuestManager
+  activeQuests: []
+  completedQuests: []
+  questDB: {fileID: 11400000, guid: 9942bca94b7c1824ea3ac26a5eee0702, type: 2}
 --- !u!1 &5254479830201988021
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
         }
         canTakeDamage = true;
     }
-
+    protected virtual void Start()
+    {
+        
+    }
     public virtual void Update()
     {
         if(entityStats == null) return;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerHealth : EntityHealth
 {
 
-    protected void Update()
+    public override void Update()
     {
         if(Input.GetKeyDown(KeyCode.N))
         {

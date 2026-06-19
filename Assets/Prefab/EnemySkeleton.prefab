@@ -1179,6 +1179,7 @@ MonoBehaviour:
   primaryWallCheck: {fileID: 7354120214944897148}
   secondaryWallCheck: {fileID: 7354120214944897148}
   groundCheck: {fileID: 3292455466164310178}
+  questTargetId: EnemySkeleton
   moveAnimSpeedMultiplier: 0.9
   stunnedDuration: 1
   stunnedVelocity: {x: 1.5, y: 3}

@@ -18,7 +18,7 @@ public class UI_Merchant : MonoBehaviour
         this.merchant = merchant;
         this.inventory = inventory;
     
-        // merchant.OnInventoryChange += UpdateSlotUI; // lắng nghe invoke từ việc player mua item
+        merchant.OnInventoryChange += UpdateSlotUI; // lắng nghe invoke từ việc player mua item
         //tức là merchant bị mất item đó => merchant cũng phải lắng nghe invoke
         //tuy nhiên nếu ta cho quá trình mua, bán item sẽ là player invoke thì không cần merchant lắng nghe
         this.inventory.OnInventoryChange += UpdateSlotUI; // vì player đang mua, bán item (OnInventoryChange.Invoke được gọi ở các function mua bán)

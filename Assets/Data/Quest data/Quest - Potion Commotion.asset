@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6d4a7c2b1b1d54183ed81053237f8b, type: 3}
+  m_Name: Quest - Potion Commotion
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDataSO
+  questSaveId: 2f836e9f43e67364b8439cc84855ed74
+  questName: Potion Commotion
+  questType: 3
+  description: 'oh I promised Martha some health potions but I''ve got me hands full.
+    Be a gem and fetch them for me, would ye? bring them to me - I''ll pass them
+    along. Be in a hurry, She gets cranky when I take too long with the health she
+    really needs. '
+  questGoal: '- Deliver health potion to Bob'
+  questTargetId: Merchant_bob
+  requiredAmount: 5
+  itemToDeliver: {fileID: 11400000, guid: 3ae84244e6b146648b8e3a3570410c83, type: 2}
+  rewardType: 1
+  rewardItems:
+  - itemId: 
+    itemData: {fileID: 11400000, guid: 7db12515911d3214fbce0a1cd337142a, type: 2}
+    stackSize: 2
+    itemEffect: {fileID: 0}
+  - itemId: 
+    itemData: {fileID: 11400000, guid: c36bb8df7bacde145a3af5c9982f049b, type: 2}
+    stackSize: 2
+    itemEffect: {fileID: 0}

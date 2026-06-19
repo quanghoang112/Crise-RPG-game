@@ -5,18 +5,22 @@ public class ObjectMerchant : ObjectNPC, IInteractable
     private InventoryPlayer inventory;
     private InventoryMerchant merchant;
 
+    [Header("Quest & Dialogue")]
+    [SerializeField] private QuestDataSO[] quests;
+
+
     protected override void Awake()
     {
         base.Awake();
         merchant = GetComponent<InventoryMerchant>();
     }
 
-    public void Interact()
+    public override void Interact()
     {
-        // Debug.Log("asd");
-
-        ui.merchantUI.SetupMerchantUI(merchant,inventory);
-        ui.OpenMerchantUI(true);
+        base.Interact();
+        ui.OpenQuestUI(quests);
+        // ui.merchantUI.SetupMerchantUI(merchant,inventory);
+        // ui.OpenMerchantUI(true);
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

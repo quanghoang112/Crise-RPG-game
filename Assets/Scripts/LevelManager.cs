@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+        Debug.Log("LeveManager Start!");
         if(instance != null && instance != this)
         {
             Destroy(gameObject);

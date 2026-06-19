@@ -21,6 +21,9 @@ public class UI : MonoBehaviour
     public UI_Options optionsUI {get; private set;}
     public UI_DeathScreen deathScreenUI{get;private set;}
     public UI_FadeScreen fadeScreenUI {get; private set;}
+    public UI_Quest questUI {get;private set;}
+    public UI_ActiveQuest activeQuestUI{get;private set;}
+    
     #endregion
 
     [SerializeField] private GameObject[] uiTabs;       // Mảng chứa các Tab con
@@ -40,6 +43,10 @@ public class UI : MonoBehaviour
         storageUI = GetComponentInChildren<UI_Storage>(true);
         deathScreenUI = GetComponentInChildren<UI_DeathScreen>(true);
         fadeScreenUI = GetComponentInChildren<UI_FadeScreen>(true);
+        questUI = GetComponentInChildren<UI_Quest>(true);
+        activeQuestUI = GetComponentInChildren<UI_ActiveQuest>(true);
+
+
     }
 
     private void Start()
@@ -91,6 +98,15 @@ public class UI : MonoBehaviour
             OpenOptionsUI();    
         };
     
+    }
+
+    public void OpenQuestUI(QuestDataSO[] questsToShow)
+    {
+        StopPlayerControls(true);
+        HideAllTooltips();
+
+        questUI.gameObject.SetActive(true);
+        questUI.SetupQuestUI(questsToShow);
     }
 
     public void OpenOptionsUI()
