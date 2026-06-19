@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(menuName = "RPG Setup/Quest Data/ Quest Database", fileName = "QUEST DATABASE")]
+[CreateAssetMenu(menuName = "RPG Setup/Quest Data/Quest Database", fileName = "QUEST DATABASE")]
 public class QuestDataBaseSO : ScriptableObject
 {
     public QuestDataSO[] allQuests;

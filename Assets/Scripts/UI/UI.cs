@@ -23,7 +23,7 @@ public class UI : MonoBehaviour
     public UI_FadeScreen fadeScreenUI {get; private set;}
     public UI_Quest questUI {get;private set;}
     public UI_ActiveQuest activeQuestUI{get;private set;}
-    
+    public UI_Dialogue dialogueUI{get;private set;}
     #endregion
 
     [SerializeField] private GameObject[] uiTabs;       // Mảng chứa các Tab con
@@ -45,7 +45,7 @@ public class UI : MonoBehaviour
         fadeScreenUI = GetComponentInChildren<UI_FadeScreen>(true);
         questUI = GetComponentInChildren<UI_Quest>(true);
         activeQuestUI = GetComponentInChildren<UI_ActiveQuest>(true);
-
+        dialogueUI = GetComponentInChildren<UI_Dialogue>(true);
 
     }
 
@@ -82,6 +82,22 @@ public class UI : MonoBehaviour
         input.UI.AlternativeInput.performed += ctx => alternativeInput = true;
         input.UI.AlternativeInput.canceled += ctx => alternativeInput = false;
     
+        input.UI.DialogueNavigation.performed += ctx =>
+        {
+          int direction = Mathf.RoundToInt(ctx.ReadValue<float>());
+
+          if(dialogueUI.gameObject.activeInHierarchy)
+            dialogueUI.NavigateChoice(direction);  
+        };
+
+        input.UI.DialogueInteraction.performed += ctx => 
+        {
+            if(dialogueUI.gameObject.activeInHierarchy)
+                dialogueUI.DialogueInteraction();
+        };
+
+
+
         input.UI.OptionUIToggle.performed += ctx => 
         {
             foreach(var element in uiElements)
@@ -98,6 +114,15 @@ public class UI : MonoBehaviour
             OpenOptionsUI();    
         };
     
+    }
+
+    public void OpenDialogueUI(DialogueLineSO firstLine)
+    {
+        StopPlayerControls(true);
+        HideAllTooltips();
+
+        dialogueUI.gameObject.SetActive(true);
+        dialogueUI.PlayDialogueLine(firstLine);
     }
 
     public void OpenQuestUI(QuestDataSO[] questsToShow)

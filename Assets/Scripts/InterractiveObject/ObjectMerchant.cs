@@ -7,6 +7,7 @@ public class ObjectMerchant : ObjectNPC, IInteractable
 
     [Header("Quest & Dialogue")]
     [SerializeField] private QuestDataSO[] quests;
+    [SerializeField] private DialogueLineSO firstDialogueLine;
 
 
     protected override void Awake()
@@ -18,8 +19,12 @@ public class ObjectMerchant : ObjectNPC, IInteractable
     public override void Interact()
     {
         base.Interact();
-        ui.OpenQuestUI(quests);
-        // ui.merchantUI.SetupMerchantUI(merchant,inventory);
+        ui.merchantUI.SetupMerchantUI(merchant,inventory);
+        
+        ui.OpenDialogueUI(firstDialogueLine);
+
+        // ui.OpenQuestUI(quests);
+        
         // ui.OpenMerchantUI(true);
     }
 

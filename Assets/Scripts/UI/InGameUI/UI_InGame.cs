@@ -102,6 +102,6 @@ public class UI_InGame : MonoBehaviour
 
         healthText.text = currentHealth + "/" + maxHealth;
         healthSlider.value = player.entityHealth.GetHealthPercent();
-        Debug.Log(player.entityHealth.GetHealthPercent());
+        // Debug.Log(player.entityHealth.GetHealthPercent());
     }
 }

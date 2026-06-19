@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8722ead48e4114dbd722053f1fba65, type: 3}
+  m_Name: Line - Merchant Bob_1
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueLineSO
+  dialogueGroupName: Merchant Bob
+  speaker: {fileID: 11400000, guid: 984c5de76c5166a4e84eac2b8540123c, type: 2}
+  textLines:
+  - If this takes longer than a pint, I'm busy.
+  - Joe took me tools again, I swear, I'll bury that bastard!
+  - Ah, good to see you, old fen. What can I get ye?
+  - Long time no see, my old fen. I hope you are doing well. What can I do for you?
+  actionLine: 
+  actionType: 5
+  choiceLines:
+  - {fileID: 11400000, guid: 39d35e1e89627b64ea9ecc9a421ae739, type: 2}
+  - {fileID: 11400000, guid: dfe9c0c1fadac1b46a40be8e933415b3, type: 2}
+  - {fileID: 11400000, guid: 34df72a4ad581fb458578e871acc6068, type: 2}
