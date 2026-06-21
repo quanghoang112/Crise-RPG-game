@@ -6,6 +6,11 @@ public class ObjectBlacksmith : ObjectNPC, IInteractable
     protected Animator anim;
     private InventoryPlayer inventory;
     private InventoryStorage storage;    
+
+    [Header("Quest & Dialogue")]
+    [SerializeField] private QuestDataSO[] quests;
+    [SerializeField] private DialogueLineSO firstDialogueLine;
+
     
     protected override void Awake()
     {
@@ -23,7 +28,8 @@ public class ObjectBlacksmith : ObjectNPC, IInteractable
         ui.craftUI.SetupCraftUI(storage);
         // ui.storage.gameObject.SetActive(true);
 
-        ui.OpenStorageUI(true);
+        // ui.OpenStorageUI(true);
+        ui.OpenDialogueUI(firstDialogueLine, new DialogueNpcData(npcRewardType:rewardNpc, quests, dropManager));
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

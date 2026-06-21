@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8722ead48e4114dbd722053f1fba65, type: 3}
-  m_Name: Line - Merchant Bob_1 2
+  m_Name: Line - Merchant Bob_2 2 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLineSO
   dialogueGroupName: Merchant Bob
   speaker: {fileID: 11400000, guid: 984c5de76c5166a4e84eac2b8540123c, type: 2}
   textLines:
-  - Do you have a job for me?
-  actionLine: 
-  actionType: 3
+  - I want to get my reward.
+  playerChoiceAnswer: I want to get my reward.
   choiceLines: []
+  actionLine: Here you go lad, you deserve it!
+  actionType: 4

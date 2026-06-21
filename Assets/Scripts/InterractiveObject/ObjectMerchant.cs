@@ -21,7 +21,7 @@ public class ObjectMerchant : ObjectNPC, IInteractable
         base.Interact();
         ui.merchantUI.SetupMerchantUI(merchant,inventory);
         
-        ui.OpenDialogueUI(firstDialogueLine);
+        ui.OpenDialogueUI(firstDialogueLine, new DialogueNpcData(rewardNpc, quests,dropManager));
 
         // ui.OpenQuestUI(quests);
         

@@ -19,6 +19,31 @@ public class PlayerQuestManager : MonoBehaviour, ISaveable
     }
 
 
+    public bool HasCompletedQuest()
+    {
+        for(int i = 0;i <activeQuests.Count;i++)
+        {
+            QuestData quest = activeQuests[i];
+            if(quest.questDataSO.questType == QuestType.Delivery)
+            {
+                var requiredItem = quest.questDataSO.itemToDeliver;
+                var requiredAmount = quest.questDataSO.requiredAmount;
+                // Debug.Log(inventory.HasItemAmount(requiredItem,requiredAmount));
+                if(inventory.HasItemAmount(requiredItem,requiredAmount) == true)
+                {
+                    return true;
+                }
+            }
+
+
+            if(quest.CanGetReward())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     private void GiveQuestReward(QuestDataSO questDataSO,EntityDropManager dropManager = null)
     {
@@ -33,7 +58,7 @@ public class PlayerQuestManager : MonoBehaviour, ISaveable
         }
     }
 
-    public void TryGiveRewardFrom(RewardType npcType, EntityDropManager dropManager = null)
+    public void TryGetRewardFrom(RewardType npcType, EntityDropManager dropManager = null)
     {
         List<QuestData> getRewardQuests = new List<QuestData>();
 
@@ -50,10 +75,10 @@ public class PlayerQuestManager : MonoBehaviour, ISaveable
                     inventory.RemoveItemAmount(requiredItem,requiredAmount);
                     quest.AddQuestProgress(requiredAmount);
                 }
+            }
             
             if(quest.CanGetReward() && quest.questDataSO.rewardType == npcType)
                 getRewardQuests.Add(quest);
-            }
         }
 
         foreach(var quest in getRewardQuests)
@@ -64,6 +89,8 @@ public class PlayerQuestManager : MonoBehaviour, ISaveable
 
 
     }
+
+
 
     public void AddProgress(string questTargetId, int amount = 1, EntityDropManager dropManager = null)
     {

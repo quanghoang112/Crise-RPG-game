@@ -11698,6 +11698,8 @@ MonoBehaviour:
   interactToolTip: {fileID: 689378346}
   floatSpeed: 8
   floatRange: 0.1
+  quests: []
+  firstDialogueLine: {fileID: 0}
 --- !u!61 &1480209173
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -11,10 +11,14 @@ public class DialogueLineSO : ScriptableObject
     [Header("Text options")]
     [TextArea] public string[] textLines;
 
+    [Header("Choices info")]
+    [TextArea] public string playerChoiceAnswer;
+    public DialogueLineSO[] choiceLines;
+    
+
     [Header("Dialogue Action")]
     [TextArea] public string actionLine;
     public DialogueActionType actionType;
-    public DialogueLineSO[] choiceLines;
 
     public string GetFirstLine() => textLines[0];
 

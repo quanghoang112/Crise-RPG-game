@@ -9,6 +9,8 @@ using UnityEngine.XR;
 public class UI_Dialogue : MonoBehaviour
 {
     private UI ui;
+    private DialogueNpcData npcData;
+    private PlayerQuestManager questManager;
 
     [SerializeField] private Image speakerPortrait;
     [SerializeField] private TextMeshProUGUI speakerName;
@@ -29,13 +31,20 @@ public class UI_Dialogue : MonoBehaviour
     private void Awake()
     {
         ui = GetComponentInParent<UI>();
+        questManager = Player.instance.questManager;
     }
 
+    public void SetupNpcData(DialogueNpcData npcData)
+    {
+        this.npcData = npcData;
+    }
 
     public void PlayDialogueLine(DialogueLineSO line)
     {
         currentLine = line;
         currentChoices = line.choiceLines;
+        selectedChoice = null;
+        selectedChoiceIndex = 0;
         HideAllChoices();
 
         speakerName.text = line.speaker.speakerName;
@@ -43,14 +52,17 @@ public class UI_Dialogue : MonoBehaviour
         
         
         fullTextToShow = line.actionType == DialogueActionType.None || line.actionType == DialogueActionType.PlayerMakeChoice ? line.GetRandomLine() : line.actionLine;
+        // fullTextToShow = line.actionLine;
         typeTextCo = StartCoroutine(TypeTextCo(fullTextToShow));
 
         // HandleNextAction();
+        
+        // selectedChoice = null;
     }
 
     private void HandleNextAction()
     {
-
+        // Debug.Log("asd");
         switch(currentLine.actionType)
         {
             case DialogueActionType.OpenShop:
@@ -58,7 +70,14 @@ public class UI_Dialogue : MonoBehaviour
                 ui.OpenMerchantUI(true);
                 break;
 
+            case DialogueActionType.OpenCraft:
+                ui.SwitchToInGameUI();
+                ui.OpenCraftUI(true);
+                break;
+
             case DialogueActionType.PlayerMakeChoice:
+                // Debug.Log("Asd" + waitingToConfirm + selectedChoice);
+                // if(!waitingToConfirm)     return;
                 if(selectedChoice == null)
                 {
                     selectedChoiceIndex = 0;
@@ -68,9 +87,28 @@ public class UI_Dialogue : MonoBehaviour
                 {
                     DialogueLineSO selectedChoice = currentChoices[selectedChoiceIndex];
                     PlayDialogueLine(selectedChoice);
-                    selectedChoice = null;
+                    // this.selectedChoice = null;
+                    // waitingToConfirm = false;
                 }
                 
+                break;
+
+            case DialogueActionType.OpenQuest:
+                ui.SwitchToInGameUI();
+                ui.OpenQuestUI(npcData.quests);
+                break;
+
+            case DialogueActionType.GetQuestReward:
+                ui.SwitchToInGameUI();
+                questManager.TryGetRewardFrom(npcData.npcRewardType,npcData.dropManager);
+                break;
+
+            case DialogueActionType.CloseDialogue:
+                ui.SwitchToInGameUI();
+                break;
+
+            default:
+                Debug.Log("Not implement yet!");
                 break;
         }
     }
@@ -80,6 +118,7 @@ public class UI_Dialogue : MonoBehaviour
         if(typeTextCo != null)
         {
             CompleteTyping();
+            // Debug.Log("aaa");
             waitingToConfirm = true;
             return;
         }
@@ -118,23 +157,28 @@ public class UI_Dialogue : MonoBehaviour
     private void ShowChoices()
     {
         HideAllChoices();
+        // Debug.Log("Asd");
 
         for(int i = 0;i< dialogueChoices.Length; i++)
         {
             if(i<currentChoices.Length)
             {
                 DialogueLineSO choice = currentChoices[i];
-                string choiceText = choice.GetFirstLine(); 
+                string choiceText = choice.playerChoiceAnswer; 
 
 
                 dialogueChoices[i].gameObject.SetActive(true);
                 dialogueChoices[i].text = selectedChoiceIndex == i ? $"<color=yellow> {i+1}. {choiceText}"
                 : $"{i + 1}. {choiceText}";
+
+                if(choice.actionType == DialogueActionType.GetQuestReward && questManager.HasCompletedQuest() == false)
+                    dialogueChoices[i].gameObject.SetActive(false);
             }
         }
 
         selectedChoice = currentChoices[selectedChoiceIndex];
-        waitingToConfirm = true;
+        
+        waitingToConfirm = true;// cho phép thực hiện HandleNextAction
     }
 
     private void HideAllChoices()
